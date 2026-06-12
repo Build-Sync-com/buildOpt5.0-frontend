@@ -35,14 +35,6 @@ function Footer() {
           {/* Brand */}
           <div className="max-w-sm">
             <Link to="/" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                  <path d="M3 21h18" />
-                  <path d="M5 21V7l8-4v18" />
-                  <path d="M19 21V11l-6-4" />
-                  <path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01" />
-                </svg>
-              </span>
               <span className="text-lg font-bold tracking-tight text-gray-900">
                 BuildOpt <span className="text-blue-600">5.0</span>
               </span>
@@ -52,7 +44,7 @@ function Footer() {
               equipment and timelines in one intelligent command center.
             </p>
             <p className="mt-5 font-mono text-xs tracking-widest text-gray-400">
-              DWG-001 · SITE OS v5.0
+              · SITE OS v5.0
             </p>
           </div>
 

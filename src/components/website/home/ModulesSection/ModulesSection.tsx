@@ -92,7 +92,7 @@ function ModulesSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="font-mono text-xs tracking-widest text-blue-600">
-            SHEET 02 · CORE MODULES
+            · CORE MODULES
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Four modules. One source of truth.
