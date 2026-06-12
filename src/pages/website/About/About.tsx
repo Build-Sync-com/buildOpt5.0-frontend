@@ -1,13 +1,26 @@
+import AboutHero from '../../../components/website/about/AboutHero/AboutHero';
+import MissionSection from '../../../components/website/about/MissionSection/MissionSection';
+import ValuesSection from '../../../components/website/about/ValuesSection/ValuesSection';
+import JourneySection from '../../../components/website/about/JourneySection/JourneySection';
+import CtaSection from '../../../components/website/home/CtaSection/CtaSection';
+
 /**
  * About Us page — public website.
  *
- * Blank placeholder. Company story / mission content to be added.
+ * Composed of standalone sections (see components/website/about), reusing the
+ * site's construction-blueprint language: intro with a drawing title block →
+ * mission / status-quo panel → principle cards → milestone timeline → closing
+ * CTA (shared with the home page).
  */
 function About() {
   return (
-    <section className="mx-auto flex max-w-7xl items-center justify-center px-4 py-32 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900">About Us</h1>
-    </section>
+    <>
+      <AboutHero />
+      <MissionSection />
+      <ValuesSection />
+      <JourneySection />
+      <CtaSection />
+    </>
   );
 }
 
