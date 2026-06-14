@@ -39,10 +39,10 @@ function CtaSection() {
             Get started today
           </Link>
           <Link
-            to="/pricing"
+            to="/features"
             className="rounded-lg border border-blue-400 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-600"
           >
-            View pricing
+            Explore features
           </Link>
         </div>
       </div>

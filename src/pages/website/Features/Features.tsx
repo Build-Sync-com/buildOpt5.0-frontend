@@ -1,14 +1,27 @@
+import FeaturesHero from '../../../components/website/features/FeaturesHero/FeaturesHero';
+import CoreFeaturesSection from '../../../components/website/features/CoreFeaturesSection/CoreFeaturesSection';
+import PlatformGridSection from '../../../components/website/features/PlatformGridSection/PlatformGridSection';
+import IntegrationSection from '../../../components/website/features/IntegrationSection/IntegrationSection';
+import CtaSection from '../../../components/website/home/CtaSection/CtaSection';
+
 /**
  * Features page — public website.
  *
- * Blank placeholder. Will showcase labor, materials, machines and equipment
- * management capabilities.
+ * Composed of standalone sections (see components/website/features), reusing
+ * the site's construction-blueprint language: intro with a drawing legend →
+ * per-module deep dive with schematic "screens" → cross-platform capability
+ * cards → connected-data wiring diagram → closing CTA (shared with the home
+ * page).
  */
 function Features() {
   return (
-    <section className="mx-auto flex max-w-7xl items-center justify-center px-4 py-32 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900">Features</h1>
-    </section>
+    <>
+      <FeaturesHero />
+      <CoreFeaturesSection />
+      <PlatformGridSection />
+      <IntegrationSection />
+      <CtaSection />
+    </>
   );
 }
 

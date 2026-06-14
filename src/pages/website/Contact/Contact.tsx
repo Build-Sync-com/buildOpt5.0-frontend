@@ -1,13 +1,22 @@
+import ContactHero from '../../../components/website/contact/ContactHero/ContactHero';
+import ContactFormSection from '../../../components/website/contact/ContactFormSection/ContactFormSection';
+import FaqSection from '../../../components/website/contact/FaqSection/FaqSection';
+
 /**
  * Contact Us page — public website.
  *
- * Blank placeholder. Contact form / details to be added.
+ * Composed of standalone sections (see components/website/contact), reusing the
+ * site's construction-blueprint language: intro with quick contact channels →
+ * a work-order styled request form with a "what happens next" sidebar →
+ * frequently asked questions.
  */
 function Contact() {
   return (
-    <section className="mx-auto flex max-w-7xl items-center justify-center px-4 py-32 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900">Contact Us</h1>
-    </section>
+    <>
+      <ContactHero />
+      <ContactFormSection />
+      <FaqSection />
+    </>
   );
 }
 
