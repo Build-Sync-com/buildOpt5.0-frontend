@@ -40,3 +40,33 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Blueprint "draw line" sweep, used by the boot loader. A blue segment
+ * travels across a faint track like a plotter laying down a line. */
+@keyframes loader-sweep {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.animate-loader-sweep {
+  animation: loader-sweep 1.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Soft blink for the monospace status tag. */
+@keyframes loader-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.animate-loader-blink {
+  animation: loader-blink 1.4s ease-in-out infinite;
+}
