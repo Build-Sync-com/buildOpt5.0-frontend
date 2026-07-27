@@ -4,7 +4,6 @@ import ErrorBoundary from '../components/common/ErrorBoundary/ErrorBoundary';
 import Home from '../pages/website/Home/Home';
 import About from '../pages/website/About/About';
 import Features from '../pages/website/Features/Features';
-import Pricing from '../pages/website/Pricing/Pricing';
 import Contact from '../pages/website/Contact/Contact';
 import NotFound from '../pages/website/NotFound/NotFound';
 
@@ -21,7 +20,6 @@ export const websiteRoutes: RouteObject = {
     { index: true, element: <Home /> },
     { path: 'about', element: <About /> },
     { path: 'features', element: <Features /> },
-    { path: 'pricing', element: <Pricing /> },
     { path: 'contact', element: <Contact /> },
     { path: '*', element: <NotFound /> },
   ],

@@ -28,7 +28,7 @@ function AboutHero() {
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-xs tracking-widest text-blue-700">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-              SHEET 03 · ABOUT BUILDOPT
+              SHEET 02 · ABOUT BUILDOPT
             </p>
 
             <h1 className="mt-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">

@@ -11,7 +11,6 @@ const footerNav = [
     heading: 'Product',
     links: [
       { label: 'Features', to: '/features' },
-      { label: 'Pricing', to: '/pricing' },
       { label: 'Get started', to: '/contact' },
     ],
   },
