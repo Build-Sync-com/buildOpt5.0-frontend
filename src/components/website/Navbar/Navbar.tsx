@@ -46,7 +46,7 @@ function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
-            to="/contact"
+            to="/signin"
             className="hidden rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 sm:block md:block"
           >
             Sign in
@@ -106,7 +106,7 @@ function Navbar() {
           </ul>
           <div className="mt-3 flex flex-col gap-2 border-t border-gray-100 pt-3">
             <Link
-              to="/contact"
+              to="/signin"
               onClick={closeMenu}
               className="block rounded-lg px-3.5 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
             >
