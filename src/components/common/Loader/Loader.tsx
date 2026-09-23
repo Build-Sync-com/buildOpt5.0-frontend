@@ -21,7 +21,7 @@ function Loader() {
           <span className="animate-loader-sweep absolute top-0 h-px w-[40%] bg-blue-600" />
         </div>
 
-        <p className="animate-loader-blink mt-4 font-mono text-[11px] uppercase tracking-[0.25em] text-gray-400">
+        <p className="animate-loader-blink mt-4 font-medium text-[11px] uppercase tracking-[0.25em] text-gray-400">
           Drafting workspace
         </p>
       </div>

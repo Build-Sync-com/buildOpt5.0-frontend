@@ -57,7 +57,7 @@ function TimelineSection() {
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · WORKFLOW
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -72,10 +72,10 @@ function TimelineSection() {
         <div className="mt-12 overflow-hidden rounded-2xl border border-gray-200">
           {/* Week ruler */}
           <div className="grid grid-cols-1 border-b border-gray-200 bg-gray-50 md:grid-cols-[minmax(0,18rem)_1fr]">
-            <div className="hidden px-6 py-3 font-mono text-xs tracking-widest text-gray-400 md:block">
+            <div className="hidden px-6 py-3 font-medium text-xs tracking-widest text-gray-400 md:block">
               PHASE
             </div>
-            <div className="flex justify-between px-6 py-3 font-mono text-xs text-gray-400">
+            <div className="flex justify-between px-6 py-3 font-medium text-xs text-gray-400">
               {weeks.map((week) => (
                 <span key={week}>{week}</span>
               ))}
@@ -89,7 +89,7 @@ function TimelineSection() {
             >
               <div className="px-6 pt-5 md:py-5">
                 <p className="flex items-baseline gap-2.5">
-                  <span className="font-mono text-xs text-amber-600">
+                  <span className="font-medium text-xs text-amber-600">
                     {phase.code}
                   </span>
                   <span className="font-semibold text-gray-900">
@@ -126,7 +126,7 @@ function TimelineSection() {
           ))}
         </div>
 
-        <p className="mt-6 text-center font-mono text-xs tracking-widest text-gray-400">
+        <p className="mt-6 text-center font-medium text-xs tracking-widest text-gray-400">
           FIG. 02 — RESOURCES SYNCHRONIZED TO THE PROGRAM
         </p>
       </div>

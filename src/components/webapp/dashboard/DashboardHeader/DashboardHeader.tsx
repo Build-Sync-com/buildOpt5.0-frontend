@@ -30,9 +30,7 @@ function DashboardHeader({ session }: DashboardHeaderProps) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p className="font-mono text-xs tracking-widest text-blue-600">
-          · DASHBOARD · {role.code}
-        </p>
+        <p className="text-sm font-semibold text-blue-600">Dashboard</p>
         <h1 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           {greetingFor(now.getHours())}, {username}
         </h1>
@@ -42,9 +40,7 @@ function DashboardHeader({ session }: DashboardHeaderProps) {
           where things stand today.
         </p>
       </div>
-      <p className="font-mono text-xs tracking-widest text-gray-400">
-        {date.toUpperCase()}
-      </p>
+      <p className="text-sm text-gray-400">{date}</p>
     </div>
   );
 }

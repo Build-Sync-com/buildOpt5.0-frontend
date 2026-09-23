@@ -26,7 +26,7 @@ function AboutHero() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Copy */}
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-xs tracking-widest text-blue-700">
+            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-medium text-xs tracking-widest text-blue-700">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
               SHEET 02 · ABOUT BUILDOPT
             </p>
@@ -46,7 +46,7 @@ function AboutHero() {
               equipment and the schedule finally live together.
             </p>
 
-            <p className="mt-8 font-mono text-xs tracking-wide text-gray-400">
+            <p className="mt-8 font-medium text-xs tracking-wide text-gray-400">
               · BUILT WITH SITE ENGINEERS, NOT JUST FOR BOARDROOMS
             </p>
           </div>
@@ -61,10 +61,10 @@ function AboutHero() {
             <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/80 shadow-2xl shadow-blue-900/10 backdrop-blur-sm">
               <div className="hazard-stripe h-1.5" aria-hidden="true" />
               <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-                <span className="font-mono text-xs tracking-widest text-gray-400">
+                <span className="font-medium text-xs tracking-widest text-gray-400">
                   TITLE BLOCK
                 </span>
-                <span className="flex items-center gap-2 font-mono text-xs tracking-widest text-blue-600">
+                <span className="flex items-center gap-2 font-medium text-xs tracking-widest text-blue-600">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                   LIVE
                 </span>
@@ -76,7 +76,7 @@ function AboutHero() {
                     key={row.field}
                     className="grid grid-cols-[7rem_1fr] items-center gap-4 px-6 py-3.5"
                   >
-                    <dt className="font-mono text-xs tracking-widest text-gray-400">
+                    <dt className="font-medium text-xs tracking-widest text-gray-400">
                       {row.field}
                     </dt>
                     <dd className="text-sm font-semibold text-gray-900">

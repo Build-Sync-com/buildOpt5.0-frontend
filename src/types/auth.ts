@@ -19,8 +19,6 @@ export type RoleId =
 
 export type UserRole = {
   id: RoleId;
-  /** Drawing-style reference shown on cards, e.g. "R-01". */
-  code: string;
   title: string;
   /** Extra org-chart context, e.g. "Site" or "Contractor side". */
   qualifier?: string;
@@ -32,7 +30,6 @@ export type UserRole = {
 
 export type RolePartyInfo = {
   id: RoleParty;
-  code: string;
   label: string;
 };
 

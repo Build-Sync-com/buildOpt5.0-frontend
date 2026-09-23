@@ -42,7 +42,7 @@ function Footer() {
               All-in-one construction site management — labor, materials,
               equipment and timelines in one intelligent command center.
             </p>
-            <p className="mt-5 font-mono text-xs tracking-widest text-gray-400">
+            <p className="mt-5 font-medium text-xs tracking-widest text-gray-400">
               · SITE OS v5.0
             </p>
           </div>
@@ -50,7 +50,7 @@ function Footer() {
           {/* Nav groups */}
           {footerNav.map((group) => (
             <div key={group.heading}>
-              <h3 className="font-mono text-xs tracking-widest text-gray-400">
+              <h3 className="font-medium text-xs tracking-widest text-gray-400">
                 {group.heading.toUpperCase()}
               </h3>
               <ul className="mt-4 space-y-3">

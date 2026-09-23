@@ -50,7 +50,7 @@ function RoleCard({ role }: RoleCardProps) {
           {role.title}
         </h3>
         {role.qualifier && (
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-widest text-amber-600">
+          <p className="mt-0.5 text-xs font-medium text-amber-600">
             {role.qualifier}
           </p>
         )}

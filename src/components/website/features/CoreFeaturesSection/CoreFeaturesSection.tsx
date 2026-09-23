@@ -27,10 +27,10 @@ function ScreenFrame({
       />
       <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl shadow-blue-900/5">
         <div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-5 py-3">
-          <span className="font-mono text-xs tracking-widest text-gray-400">
+          <span className="font-medium text-xs tracking-widest text-gray-400">
             {tag}
           </span>
-          <span className="flex items-center gap-2 font-mono text-xs tracking-widest text-emerald-600">
+          <span className="flex items-center gap-2 font-medium text-xs tracking-widest text-emerald-600">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             {status}
           </span>
@@ -67,10 +67,10 @@ function LaborScreen() {
             </div>
             <div className="w-24">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] text-gray-400">
+                <span className="font-medium text-[10px] text-gray-400">
                   MATCH
                 </span>
-                <span className="font-mono text-xs font-bold text-blue-600">
+                <span className="text-xs font-bold text-blue-600">
                   {c.match}%
                 </span>
               </div>
@@ -106,11 +106,11 @@ function MaterialScreen() {
                 {s.item}
               </span>
               {s.low ? (
-                <span className="rounded-md bg-amber-100 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wide text-amber-700">
+                <span className="rounded-md bg-amber-100 px-2 py-0.5 text-[10px] font-bold tracking-wide text-amber-700">
                   LOW · REORDER
                 </span>
               ) : (
-                <span className="font-mono text-xs text-gray-400">
+                <span className="font-medium text-xs text-gray-400">
                   {s.level}%
                 </span>
               )}
@@ -145,7 +145,7 @@ function EquipmentScreen() {
             key={f.id}
             className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/70 p-3"
           >
-            <span className="font-mono text-xs font-bold tracking-widest text-gray-500">
+            <span className="text-xs font-bold tracking-widest text-gray-500">
               {f.id}
             </span>
             <div className="min-w-0 flex-1">
@@ -163,13 +163,13 @@ function EquipmentScreen() {
             </div>
             <div className="text-right">
               <p
-                className={`font-mono text-sm font-bold ${
+                className={`text-sm font-bold ${
                   f.active ? 'text-blue-600' : 'text-amber-600'
                 }`}
               >
                 {f.util}%
               </p>
-              <p className="font-mono text-[10px] text-gray-400">UTIL</p>
+              <p className="font-medium text-[10px] text-gray-400">UTIL</p>
             </div>
           </li>
         ))}
@@ -188,7 +188,7 @@ const program = [
 function TimelineScreen() {
   return (
     <ScreenFrame tag="PROGRAM · BLOCK B" status="ON TRACK">
-      <div className="mb-3 flex justify-between font-mono text-[10px] text-gray-400">
+      <div className="mb-3 flex justify-between font-medium text-[10px] text-gray-400">
         {['W1', 'W4', 'W7', 'W10', 'W13'].map((w) => (
           <span key={w}>{w}</span>
         ))}
@@ -289,7 +289,7 @@ function CoreFeaturesSection() {
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · MODULE BREAKDOWN
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -311,10 +311,10 @@ function CoreFeaturesSection() {
               {/* Copy */}
               <div className={index % 2 === 1 ? 'lg:order-last' : ''}>
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs tracking-widest text-blue-600">
+                  <span className="font-medium text-xs tracking-widest text-blue-600">
                     {feature.eyebrow}
                   </span>
-                  <span className="font-mono text-xs tracking-widest text-gray-300">
+                  <span className="font-medium text-xs tracking-widest text-gray-300">
                     {feature.code}
                   </span>
                 </div>

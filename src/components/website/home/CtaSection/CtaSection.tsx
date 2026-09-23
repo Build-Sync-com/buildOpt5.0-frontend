@@ -21,7 +21,7 @@ function CtaSection() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <p className="font-mono text-xs tracking-widest text-blue-200">
+        <p className="font-medium text-xs tracking-widest text-blue-200">
           PERMIT GRANTED · READY TO BUILD
         </p>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
