@@ -13,7 +13,7 @@ import type { RoleParty } from '../../../../types/auth';
  * consultant and client share a row with a note on how accounts are issued.
  */
 function countLabel(count: number) {
-  return `${String(count).padStart(2, '0')} ${count === 1 ? 'ROLE' : 'ROLES'}`;
+  return `${count} ${count === 1 ? 'role' : 'roles'}`;
 }
 
 function PartyGroup({
@@ -30,7 +30,6 @@ function PartyGroup({
 
   return (
     <RoleGroup
-      code={info.code}
       label={info.label}
       meta={countLabel(roles.length)}
       gridClassName={gridClassName}
@@ -77,7 +76,7 @@ function RoleSelect() {
         <PartyGroup party="client" />
 
         {/* No self sign-up: accounts come from the admin portal */}
-        <RoleGroup code="NOTE" label="No account yet?">
+        <RoleGroup label="No account yet?">
           <div className="flex h-full flex-col rounded-2xl border border-dashed border-gray-300 bg-gray-50/80 p-5">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
               <Icon name="info" />

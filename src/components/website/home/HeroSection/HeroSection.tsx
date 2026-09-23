@@ -28,7 +28,7 @@ function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Copy */}
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-xs tracking-widest text-blue-700">
+            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-medium text-xs tracking-widest text-blue-700">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
               BUILDOPT · SITE OS v5.0
             </p>
@@ -65,7 +65,7 @@ function HeroSection() {
               </Link>
             </div>
 
-            <p className="mt-8 font-mono text-xs tracking-wide text-gray-400">
+            <p className="mt-8 font-medium text-xs tracking-wide text-gray-400">
                · LABOR / MATERIALS / EQUIPMENT / TIMELINE
             </p>
           </div>

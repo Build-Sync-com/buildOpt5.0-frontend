@@ -16,7 +16,7 @@ function IntegrationSection() {
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="font-mono text-xs tracking-widest text-blue-600">
+        <p className="font-medium text-xs tracking-widest text-blue-600">
           · ONE SOURCE OF TRUTH
         </p>
         <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -37,7 +37,7 @@ function IntegrationSection() {
                   key={n.tag}
                   className="rounded-xl border border-gray-200 bg-white px-5 py-4 text-left shadow-sm"
                 >
-                  <p className="font-mono text-xs tracking-widest text-blue-600">
+                  <p className="font-medium text-xs tracking-widest text-blue-600">
                     {n.tag}
                   </p>
                   <p className="mt-1 text-sm text-gray-600">{n.note}</p>
@@ -52,8 +52,8 @@ function IntegrationSection() {
                   className="hazard-stripe absolute inset-x-0 top-0 h-1.5"
                   aria-hidden="true"
                 />
-                <span className="font-mono text-2xl font-bold">B</span>
-                <span className="mt-1 font-mono text-[10px] tracking-widest text-blue-100">
+                <span className="text-2xl font-bold">B</span>
+                <span className="mt-1 font-medium text-[10px] tracking-widest text-blue-100">
                   CORE
                 </span>
               </div>
@@ -66,7 +66,7 @@ function IntegrationSection() {
                   key={n.tag}
                   className="rounded-xl border border-gray-200 bg-white px-5 py-4 text-left shadow-sm"
                 >
-                  <p className="font-mono text-xs tracking-widest text-blue-600">
+                  <p className="font-medium text-xs tracking-widest text-blue-600">
                     {n.tag}
                   </p>
                   <p className="mt-1 text-sm text-gray-600">{n.note}</p>
@@ -75,7 +75,7 @@ function IntegrationSection() {
             </div>
           </div>
 
-          <p className="mt-8 font-mono text-xs tracking-widest text-gray-400">
+          <p className="mt-8 font-medium text-xs tracking-widest text-gray-400">
             FIG. 05 — ONE ACTION, FOUR MODULES UPDATED
           </p>
         </div>

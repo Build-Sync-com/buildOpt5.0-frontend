@@ -4,7 +4,7 @@ import Icon from '../../../common/Icon/Icon';
  * AuthStepper
  *
  * Two-step progress marker for the sign-in flow (role → credentials): numbered
- * drawing-tag nodes joined by a thin dimension line.
+ * nodes joined by a thin line.
  */
 const steps = ['Select role', 'Sign in'];
 
@@ -14,7 +14,7 @@ type AuthStepperProps = {
 
 function AuthStepper({ current }: AuthStepperProps) {
   return (
-    <ol className="flex items-center gap-3 font-mono text-[11px] tracking-widest">
+    <ol className="flex items-center gap-3 text-xs font-medium">
       {steps.map((label, index) => {
         const step = index + 1;
         const done = step < current;
@@ -33,7 +33,7 @@ function AuthStepper({ current }: AuthStepperProps) {
               />
             )}
             <span
-              className={`flex h-6 w-6 items-center justify-center rounded-md border text-[10px] font-bold ${
+              className={`flex h-6 w-6 items-center justify-center rounded-md border text-[11px] font-bold ${
                 active
                   ? 'border-blue-600 bg-blue-600 text-white shadow-sm shadow-blue-600/25'
                   : done
@@ -44,11 +44,11 @@ function AuthStepper({ current }: AuthStepperProps) {
               {done ? (
                 <Icon name="check" className="h-3.5 w-3.5" strokeWidth={2.5} />
               ) : (
-                String(step).padStart(2, '0')
+                step
               )}
             </span>
             <span className={active ? 'text-gray-900' : 'text-gray-400'}>
-              {label.toUpperCase()}
+              {label}
             </span>
           </li>
         );

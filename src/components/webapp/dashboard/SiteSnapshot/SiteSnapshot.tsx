@@ -27,15 +27,13 @@ function SiteSnapshot() {
   return (
     <section className="mt-10">
       <div className="flex items-center gap-3">
-        <h2 className="font-mono text-xs tracking-widest text-blue-600">
-          · SITE SNAPSHOT
-        </h2>
+        <h2 className="text-sm font-semibold text-blue-600">Site snapshot</h2>
         <span
           className="h-px flex-1 border-t border-dashed border-gray-300"
           aria-hidden="true"
         />
-        <span className="rounded-full bg-amber-100 px-2.5 py-0.5 font-mono text-[10px] tracking-widest text-amber-700">
-          SAMPLE DATA
+        <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
+          Sample data
         </span>
       </div>
 
@@ -62,7 +60,7 @@ function SiteSnapshot() {
                 />
               </div>
             )}
-            <p className="mt-2 font-mono text-[11px] tracking-wide text-gray-400">
+            <p className="mt-2 text-xs text-gray-400">
               {stat.note}
             </p>
           </div>

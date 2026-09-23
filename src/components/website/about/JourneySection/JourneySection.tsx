@@ -50,7 +50,7 @@ function JourneySection() {
     <section className="bg-gray-50 py-20 lg:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · SETTING OUT
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -76,7 +76,7 @@ function JourneySection() {
               </span>
 
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="font-mono text-xs tracking-widest text-amber-600">
+                <span className="font-medium text-xs tracking-widest text-amber-600">
                   {milestone.code}
                 </span>
                 <span className="text-2xl font-bold tracking-tight text-blue-600">
@@ -91,7 +91,7 @@ function JourneySection() {
           ))}
         </ol>
 
-        <p className="mt-12 text-center font-mono text-xs tracking-widest text-gray-400">
+        <p className="mt-12 text-center font-medium text-xs tracking-widest text-gray-400">
           FIG. 03 — STILL UNDER CONSTRUCTION
         </p>
       </div>

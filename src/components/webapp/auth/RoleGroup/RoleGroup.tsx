@@ -3,13 +3,12 @@ import type { ReactNode } from 'react';
 /**
  * RoleGroup
  *
- * A labelled band on the role picker: group code, name and a count, joined by
- * a dashed leader line, with its cards laid out underneath.
+ * A labelled band on the role picker: group name and a count, joined by a
+ * dashed leader line, with its cards laid out underneath.
  */
 type RoleGroupProps = {
-  code: string;
   label: string;
-  /** Right-hand tag, e.g. "08 ROLES". */
+  /** Right-hand tag, e.g. "8 roles". */
   meta?: string;
   /** Grid classes for the cards, e.g. "sm:grid-cols-2 lg:grid-cols-4". */
   gridClassName?: string;
@@ -18,7 +17,6 @@ type RoleGroupProps = {
 };
 
 function RoleGroup({
-  code,
   label,
   meta,
   gridClassName = '',
@@ -28,9 +26,6 @@ function RoleGroup({
   return (
     <section className={`flex flex-col ${className}`}>
       <div className="flex items-center gap-3">
-        <span className="font-mono text-[11px] tracking-widest text-amber-600">
-          {code}
-        </span>
         <h2 className="text-sm font-semibold whitespace-nowrap text-gray-900">
           {label}
         </h2>
@@ -39,7 +34,7 @@ function RoleGroup({
           aria-hidden="true"
         />
         {meta && (
-          <span className="font-mono text-[11px] tracking-widest whitespace-nowrap text-gray-400">
+          <span className="text-xs whitespace-nowrap text-gray-400">
             {meta}
           </span>
         )}

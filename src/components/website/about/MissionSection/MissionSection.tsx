@@ -19,7 +19,7 @@ function MissionSection() {
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
         {/* Copy */}
         <div>
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · OUR MISSION
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -44,7 +44,7 @@ function MissionSection() {
             aria-hidden="true"
           />
           <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 shadow-xl shadow-blue-900/5">
-            <p className="font-mono text-xs tracking-widest text-gray-400">
+            <p className="font-medium text-xs tracking-widest text-gray-400">
               TODAY — FRAGMENTED
             </p>
             <ul className="mt-4 space-y-2.5">
@@ -59,14 +59,14 @@ function MissionSection() {
               ))}
             </ul>
 
-            <div className="my-6 flex items-center gap-3 font-mono text-xs tracking-widest text-blue-600">
+            <div className="my-6 flex items-center gap-3 font-medium text-xs tracking-widest text-blue-600">
               <span className="h-px flex-1 bg-gray-200" />
               CONSOLIDATED INTO
               <span className="h-px flex-1 bg-gray-200" />
             </div>
 
             <div className="flex items-center gap-4 rounded-xl border border-blue-200 bg-blue-50 p-5">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 font-mono text-sm font-bold text-white">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-sm font-bold text-white">
                 B
               </span>
               <div>

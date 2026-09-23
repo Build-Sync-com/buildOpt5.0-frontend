@@ -6,16 +6,15 @@ import type { RoleParty, RolePartyInfo, UserRole } from '../types/auth';
  * this list drives the sign-in flow and each role's workspace.
  */
 export const roleParties: RolePartyInfo[] = [
-  { id: 'contractor', code: 'GRP-A', label: 'Contractor · Site team' },
-  { id: 'consultant', code: 'GRP-B', label: 'Consultant' },
-  { id: 'client', code: 'GRP-C', label: 'Client' },
+  { id: 'contractor', label: 'Contractor · Site team' },
+  { id: 'consultant', label: 'Consultant' },
+  { id: 'client', label: 'Client' },
 ];
 
 export const userRoles: UserRole[] = [
   // Contractor — site team
   {
     id: 'project-manager',
-    code: 'R-01',
     title: 'Project Manager',
     qualifier: 'Site',
     party: 'contractor',
@@ -24,7 +23,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'planning-engineer',
-    code: 'R-02',
     title: 'Planning Engineer',
     qualifier: 'Site',
     party: 'contractor',
@@ -33,7 +31,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'engineer',
-    code: 'R-03',
     title: 'Engineer',
     party: 'contractor',
     workspace: ['Daily tasks & crew allocation', 'Material requests', 'Site diary & progress logs'],
@@ -41,7 +38,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'assistant-engineer',
-    code: 'R-04',
     title: 'Assistant Engineer',
     party: 'contractor',
     workspace: ['Assigned tasks', 'Labor attendance', 'Measurement sheets'],
@@ -49,7 +45,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'qa-qc-engineer',
-    code: 'R-05',
     title: 'QA/QC Engineer',
     party: 'contractor',
     workspace: ['Inspection requests', 'Material test records', 'NCRs & checklists'],
@@ -57,7 +52,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'quantity-surveyor',
-    code: 'R-06',
     title: 'Quantity Surveyor',
     qualifier: 'Contractor side',
     party: 'contractor',
@@ -66,7 +60,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'site-admin',
-    code: 'R-07',
     title: 'Admin',
     qualifier: 'Site',
     party: 'contractor',
@@ -75,7 +68,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'store-keeper',
-    code: 'R-08',
     title: 'Store Keeper',
     party: 'contractor',
     workspace: ['Goods received notes', 'Material issues', 'Stock levels & reorders'],
@@ -85,7 +77,6 @@ export const userRoles: UserRole[] = [
   // Consultant
   {
     id: 'consultant-engineer',
-    code: 'R-09',
     title: 'Consultant Engineer',
     party: 'consultant',
     workspace: ['Submittals & approvals', 'Site instructions', 'Progress reviews'],
@@ -93,7 +84,6 @@ export const userRoles: UserRole[] = [
   },
   {
     id: 'consultant-qa-qc-engineer',
-    code: 'R-10',
     title: 'Consultant QA/QC Engineer',
     party: 'consultant',
     workspace: ['Inspection approvals', 'Test witnessing', 'Quality audit trail'],
@@ -103,7 +93,6 @@ export const userRoles: UserRole[] = [
   // Client
   {
     id: 'client',
-    code: 'R-11',
     title: 'Client',
     party: 'client',
     workspace: ['Progress overview', 'Milestones & payments', 'Reports & documents'],

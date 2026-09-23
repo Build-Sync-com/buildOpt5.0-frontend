@@ -34,7 +34,7 @@ function SmartMatchSection() {
 
         {/* Copy */}
         <div>
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · INTELLIGENCE
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -49,7 +49,7 @@ function SmartMatchSection() {
           <dl className="mt-8 space-y-6">
             {matchSignals.map((signal, index) => (
               <div key={signal.title} className="flex gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 font-mono text-xs font-bold text-amber-700">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-xs font-bold text-amber-700">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>

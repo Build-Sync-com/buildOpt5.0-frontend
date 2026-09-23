@@ -27,7 +27,7 @@ function FeaturesHero() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Copy */}
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-xs tracking-widest text-blue-700">
+            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-medium text-xs tracking-widest text-blue-700">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
               SHEET 03 · FEATURES
             </p>
@@ -64,7 +64,7 @@ function FeaturesHero() {
               </Link>
             </div>
 
-            <p className="mt-8 font-mono text-xs tracking-wide text-gray-400">
+            <p className="mt-8 font-medium text-xs tracking-wide text-gray-400">
               · 42 FEATURES · 4 MODULES · 1 SOURCE OF TRUTH
             </p>
           </div>
@@ -79,10 +79,10 @@ function FeaturesHero() {
             <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/80 shadow-2xl shadow-blue-900/10 backdrop-blur-sm">
               <div className="hazard-stripe h-1.5" aria-hidden="true" />
               <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-                <span className="font-mono text-xs tracking-widest text-gray-400">
+                <span className="font-medium text-xs tracking-widest text-gray-400">
                   LEGEND · WHAT'S INSIDE
                 </span>
-                <span className="font-mono text-xs tracking-widest text-blue-600">
+                <span className="font-medium text-xs tracking-widest text-blue-600">
                   FIG. 04
                 </span>
               </div>
@@ -93,13 +93,13 @@ function FeaturesHero() {
                     key={row.tag}
                     className="flex items-center gap-4 px-6 py-4"
                   >
-                    <span className="font-mono text-xs tracking-widest text-amber-600">
+                    <span className="font-medium text-xs tracking-widest text-amber-600">
                       {row.tag}
                     </span>
                     <span className="flex-1 text-sm font-semibold text-gray-900">
                       {row.label}
                     </span>
-                    <span className="rounded-md bg-blue-50 px-2 py-0.5 font-mono text-xs text-blue-600">
+                    <span className="rounded-md bg-blue-50 px-2 py-0.5 font-medium text-xs text-blue-600">
                       {row.count}
                     </span>
                   </li>

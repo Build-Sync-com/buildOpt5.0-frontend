@@ -56,7 +56,7 @@
   animation: loader-sweep 1.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Soft blink for the monospace status tag. */
+/* Soft blink for the loader status tag. */
 @keyframes loader-blink {
   0%,
   100% {

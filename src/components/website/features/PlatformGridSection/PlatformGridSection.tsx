@@ -96,7 +96,7 @@ function PlatformGridSection() {
     <section className="bg-gray-50 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · ACROSS THE PLATFORM
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -118,7 +118,7 @@ function PlatformGridSection() {
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white">
                   {cap.icon}
                 </span>
-                <span className="font-mono text-xs tracking-widest text-gray-400">
+                <span className="font-medium text-xs tracking-widest text-gray-400">
                   {cap.code}
                 </span>
               </div>

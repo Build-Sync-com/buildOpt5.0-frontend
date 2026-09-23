@@ -58,7 +58,7 @@ const nextSteps = [
 
 const inputClass =
   'mt-1.5 w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2.5 text-sm text-gray-900 shadow-sm transition placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20';
-const labelClass = 'font-mono text-xs tracking-widest text-gray-500';
+const labelClass = 'font-medium text-xs tracking-widest text-gray-500';
 
 function ContactFormSection() {
   const [form, setForm] = useState<FormState>(empty);
@@ -86,10 +86,10 @@ function ContactFormSection() {
         <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl shadow-blue-900/5">
           <div className="hazard-stripe h-1.5" aria-hidden="true" />
           <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 sm:px-8">
-            <span className="font-mono text-xs tracking-widest text-gray-400">
+            <span className="font-medium text-xs tracking-widest text-gray-400">
               REQUEST FORM · WO-0001
             </span>
-            <span className="flex items-center gap-2 font-mono text-xs tracking-widest text-blue-600">
+            <span className="flex items-center gap-2 font-medium text-xs tracking-widest text-blue-600">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               {submitted ? 'LOGGED' : 'DRAFT'}
             </span>
@@ -233,7 +233,7 @@ function ContactFormSection() {
               >
                 Send request
               </button>
-              <p className="mt-3 font-mono text-xs tracking-wide text-gray-400">
+              <p className="mt-3 font-medium text-xs tracking-wide text-gray-400">
                 · NO SPAM · WE NEVER SHARE YOUR DETAILS
               </p>
             </form>
@@ -242,7 +242,7 @@ function ContactFormSection() {
 
         {/* Sidebar: what happens next */}
         <div>
-          <p className="font-mono text-xs tracking-widest text-blue-600">
+          <p className="font-medium text-xs tracking-widest text-blue-600">
             · WHAT HAPPENS NEXT
           </p>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-gray-900">
@@ -259,11 +259,11 @@ function ContactFormSection() {
                     aria-hidden="true"
                   />
                 )}
-                <span className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 font-mono text-xs font-bold text-blue-600">
+                <span className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-xs font-bold text-blue-600">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>
-                  <p className="font-mono text-[10px] tracking-widest text-gray-400">
+                  <p className="font-medium text-[10px] tracking-widest text-gray-400">
                     {step.code}
                   </p>
                   <p className="mt-0.5 font-semibold text-gray-900">
@@ -279,7 +279,7 @@ function ContactFormSection() {
 
           {/* Response SLA card */}
           <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50 p-5">
-            <div className="flex items-center gap-2 font-mono text-xs tracking-widest text-blue-700">
+            <div className="flex items-center gap-2 font-medium text-xs tracking-widest text-blue-700">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
               TYPICAL RESPONSE
             </div>

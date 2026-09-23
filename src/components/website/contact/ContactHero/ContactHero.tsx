@@ -53,7 +53,7 @@ function ContactHero() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 text-center sm:px-6 lg:px-8 lg:pt-24">
-        <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-xs tracking-widest text-blue-700">
+        <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-medium text-xs tracking-widest text-blue-700">
           <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
           SHEET 04 · CONTACT
         </p>
@@ -81,7 +81,7 @@ function ContactHero() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white">
                     {c.icon}
                   </span>
-                  <span className="font-mono text-xs tracking-widest text-gray-400">
+                  <span className="font-medium text-xs tracking-widest text-gray-400">
                     {c.tag}
                   </span>
                 </div>
