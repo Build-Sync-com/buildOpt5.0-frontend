@@ -1,8 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { websiteRoutes } from './websiteRoutes';
+import { authRoutes } from './authRoutes';
+import { webappRoutes } from './webappRoutes';
 
 /**
- * Application router. The public website routes live here today; app/dashboard
- * routes will be added alongside them as the platform grows.
+ * Application router: the public website, the web app sign-in flow
+ * (/signin) and the signed-in web app (/app).
  */
-export const router = createBrowserRouter([websiteRoutes]);
+export const router = createBrowserRouter([websiteRoutes, authRoutes, webappRoutes]);
