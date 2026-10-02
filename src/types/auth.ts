@@ -1,7 +1,7 @@
 import type { IconName } from '../components/common/Icon/Icon';
 
 /** Which side of the contract a role works for. */
-export type RoleParty = 'contractor' | 'consultant' | 'client';
+export type RoleParty = 'contractor' | 'head-office' | 'consultant' | 'client';
 
 /** URL-safe identifier for every role that can sign in to the web app. */
 export type RoleId =
@@ -13,6 +13,10 @@ export type RoleId =
   | 'quantity-surveyor'
   | 'site-admin'
   | 'store-keeper'
+  | 'head-office-hr'
+  | 'head-office-management'
+  | 'head-office-planning-engineer'
+  | 'head-office-admin'
   | 'consultant-engineer'
   | 'consultant-qa-qc-engineer'
   | 'client';

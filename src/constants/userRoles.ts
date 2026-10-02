@@ -7,6 +7,7 @@ import type { RoleParty, RolePartyInfo, UserRole } from '../types/auth';
  */
 export const roleParties: RolePartyInfo[] = [
   { id: 'contractor', label: 'Contractor · Site team' },
+  { id: 'head-office', label: 'Contractor · Head office' },
   { id: 'consultant', label: 'Consultant' },
   { id: 'client', label: 'Client' },
 ];
@@ -72,6 +73,40 @@ export const userRoles: UserRole[] = [
     party: 'contractor',
     workspace: ['Goods received notes', 'Material issues', 'Stock levels & reorders'],
     icon: 'warehouse',
+  },
+
+  // Contractor — head office
+  {
+    id: 'head-office-hr',
+    title: 'HR',
+    qualifier: 'Head office',
+    party: 'head-office',
+    workspace: ['Staff records & onboarding', 'Leave & payroll inputs', 'Recruitment & contracts'],
+    icon: 'users',
+  },
+  {
+    id: 'head-office-management',
+    title: 'Management',
+    qualifier: 'Head office',
+    party: 'head-office',
+    workspace: ['Portfolio overview across sites', 'Cost & programme performance', 'Executive reports'],
+    icon: 'trendingUp',
+  },
+  {
+    id: 'head-office-planning-engineer',
+    title: 'Planning Engineer',
+    qualifier: 'Head office',
+    party: 'head-office',
+    workspace: ['Company-wide programmes', 'Resource planning across sites', 'Progress vs. baseline reviews'],
+    icon: 'chartGantt',
+  },
+  {
+    id: 'head-office-admin',
+    title: 'Admin',
+    qualifier: 'Head office',
+    party: 'head-office',
+    workspace: ['Company documents', 'Correspondence register', 'Office administration'],
+    icon: 'userCog',
   },
 
   // Consultant

@@ -46,7 +46,7 @@ function AuthLayout() {
       <footer className="relative">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-gray-400 sm:flex-row sm:px-6 lg:px-8">
           <span>© {year} BuildOpt · Site OS v5.0</span>
-          <span>Accounts are managed by your company admin</span>
+          <span>Accounts are managed by your company administration</span>
         </div>
       </footer>
     </div>

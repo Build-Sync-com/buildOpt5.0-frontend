@@ -9,7 +9,7 @@ import type { UserRole } from '../../../../types/auth';
  * on hover/focus it picks up a dashed CAD-style selection box with grips at
  * the corners and its icon tile fills blue. Clicking goes straight to the
  * credentials step for that role. On phones it collapses to a compact row so
- * all eleven roles fit without endless scrolling.
+ * all fifteen roles fit without endless scrolling.
  */
 const grips = [
   '-left-[3.5px] -top-[3.5px]',
