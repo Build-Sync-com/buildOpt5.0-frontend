@@ -9,8 +9,9 @@ import type { RoleParty } from '../../../../types/auth';
  * RoleSelect — sign-in step 1.
  *
  * The user picks the role they hold on the project; each card continues to the
- * credentials step for that role. Contractor roles fill the first band, then
- * consultant and client share a row with a note on how accounts are issued.
+ * credentials step for that role. Contractor site roles fill the first band and
+ * head office roles the second, then consultant and client share a row with a
+ * note on how accounts are issued.
  */
 function countLabel(count: number) {
   return `${count} ${count === 1 ? 'role' : 'roles'}`;
@@ -52,7 +53,7 @@ function RoleSelect() {
           Choose your{' '}
           <span className="relative whitespace-nowrap">
             <span className="absolute -inset-x-1 inset-y-1 -skew-y-1 rounded bg-amber-200/70" />
-            <span className="relative">role on site</span>
+            <span className="relative">role</span>
           </span>
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-gray-600">
@@ -63,6 +64,12 @@ function RoleSelect() {
 
       <PartyGroup
         party="contractor"
+        className="mt-12"
+        gridClassName="sm:grid-cols-2 lg:grid-cols-4"
+      />
+
+      <PartyGroup
+        party="head-office"
         className="mt-12"
         gridClassName="sm:grid-cols-2 lg:grid-cols-4"
       />
