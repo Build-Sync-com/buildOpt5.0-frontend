@@ -4,8 +4,8 @@ import type { Batch, UnitId } from '../../../../types/materials';
 /**
  * BatchBar
  *
- * Stock on hand split into its batches, oldest on the left. The amber
- * segment is the batch the next issue will draw from.
+ * Stock on hand split into its batches, oldest on the left. With more than
+ * one batch, the amber segment is the batch the next issue will draw from.
  */
 type BatchBarProps = {
   /** Open batches in FIFO order. */
@@ -37,7 +37,11 @@ function BatchBar({ batches, unit, className = '' }: BatchBarProps) {
           key={batch.id}
           title={`Received ${formatDayMonth(batch.receivedOn)} · ${formatQuantity(batch.quantityRemaining, unit)} left`}
           className={`h-full min-w-1.5 ${
-            i === 0 ? 'bg-amber-400' : i % 2 === 1 ? 'bg-blue-600' : 'bg-blue-400'
+            i === 0 && batches.length > 1
+              ? 'bg-amber-400'
+              : i % 2 === 1 || batches.length === 1
+                ? 'bg-blue-600'
+                : 'bg-blue-400'
           }`}
           style={{ width: `${(batch.quantityRemaining / total) * 100}%` }}
         />

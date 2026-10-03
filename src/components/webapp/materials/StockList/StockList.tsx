@@ -178,15 +178,17 @@ function StockList({ stock, onOpen }: StockListProps) {
                     <span className="col-span-2 min-w-0 md:col-span-1">
                       <BatchBar batches={openBatches} unit={material.unit} />
                       <span className="mt-1.5 block truncate text-xs text-gray-500">
-                        {nextOut ? (
+                        {openBatches.length > 1 ? (
                           <>
-                            {openBatches.length} {openBatches.length === 1 ? 'batch' : 'batches'}
+                            {openBatches.length} batches
                             <span className="text-gray-300"> · </span>
                             <span className="inline-flex items-center gap-1">
                               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                               next out received {formatDayMonth(nextOut.receivedOn)}
                             </span>
                           </>
+                        ) : nextOut ? (
+                          `1 batch · received ${formatDayMonth(nextOut.receivedOn)}`
                         ) : (
                           'No batches in store'
                         )}
@@ -220,7 +222,7 @@ function StockList({ stock, onOpen }: StockListProps) {
           <span className="h-2 w-4 rounded-full bg-amber-400" /> Next batch out
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-4 rounded-full bg-blue-600" /> Newer batches
+          <span className="h-2 w-4 rounded-full bg-blue-600" /> Later batches
         </span>
       </p>
     </div>

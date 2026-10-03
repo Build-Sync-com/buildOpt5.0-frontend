@@ -62,20 +62,20 @@ function MaterialsStats({ stock }: { stock: MaterialStock[] }) {
   ];
 
   return (
-    <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {stats.map((stat) => (
-        <div key={stat.label} className="rounded-2xl border border-gray-200 bg-white p-5">
+        <div key={stat.label} className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-5">
           <div className="flex items-center justify-between gap-3">
-            <span className="text-sm text-gray-500">{stat.label}</span>
+            <span className="text-xs text-gray-500 sm:text-sm">{stat.label}</span>
             <span
-              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+              className={`hidden h-9 w-9 shrink-0 items-center sm:flex justify-center rounded-lg ${
                 stat.alert ? 'bg-amber-100 text-amber-700' : 'bg-blue-50 text-blue-600'
               }`}
             >
               <Icon name={stat.icon} className="h-[18px] w-[18px]" />
             </span>
           </div>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900">{stat.value}</p>
+          <p className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{stat.value}</p>
           <p className="mt-2 text-xs text-gray-400">{stat.note}</p>
         </div>
       ))}
