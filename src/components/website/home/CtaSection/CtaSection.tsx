@@ -29,7 +29,7 @@ function CtaSection() {
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-lg text-blue-100">
           Bring labor, materials, machines and the schedule into one command
-          center — and let BuildOpt find the best crew for every task.
+          center - and let BuildOpt find the best crew for every task.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link

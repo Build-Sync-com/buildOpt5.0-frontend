@@ -10,7 +10,7 @@ import type {
  * Units, categories and permissions for the materials store.
  *
  * A material picks one unit when it's added and its stock is always counted
- * in that unit — bags of cement, cubes of sand, kg of steel, nos of pins. To
+ * in that unit - bags of cement, cubes of sand, kg of steel, nos of pins. To
  * support a new unit, add it to UnitId in types/materials.ts and list it here.
  */
 export const measureKinds: { id: MeasureKind; label: string }[] = [

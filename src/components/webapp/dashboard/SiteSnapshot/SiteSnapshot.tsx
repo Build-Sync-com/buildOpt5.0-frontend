@@ -4,7 +4,7 @@ import type { IconName } from '../../../common/Icon/Icon';
 /**
  * SiteSnapshot
  *
- * Four headline tiles for the site — labor, materials, machines, programme.
+ * Four headline tiles for the site - labor, materials, machines, programme.
  * Values are sample data until the dashboard is wired to the backend.
  */
 type Stat = {

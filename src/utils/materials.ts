@@ -47,7 +47,7 @@ export function formatCurrency(value: number): string {
 }
 
 /* ---------------------------------------------------------------------------
- * Dates — stored as local ISO dates (yyyy-mm-dd)
+ * Dates - stored as local ISO dates (yyyy-mm-dd)
  * ------------------------------------------------------------------------- */
 
 export function toISODate(date: Date): string {

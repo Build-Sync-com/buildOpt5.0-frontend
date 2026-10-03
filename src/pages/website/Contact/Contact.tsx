@@ -3,7 +3,7 @@ import ContactFormSection from '../../../components/website/contact/ContactFormS
 import FaqSection from '../../../components/website/contact/FaqSection/FaqSection';
 
 /**
- * Contact Us page — public website.
+ * Contact Us page - public website.
  *
  * Composed of standalone sections (see components/website/contact), reusing the
  * site's construction-blueprint language: intro with quick contact channels →

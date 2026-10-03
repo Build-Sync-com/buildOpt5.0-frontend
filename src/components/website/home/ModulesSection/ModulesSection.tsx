@@ -21,7 +21,7 @@ const modules: Module[] = [
     code: 'MOD-01',
     title: 'Labor management',
     description:
-      'Every worker, skill and certification in one roster — with attendance, payroll and performance tracked per task.',
+      'Every worker, skill and certification in one roster - with attendance, payroll and performance tracked per task.',
     points: ['Skill & certification registry', 'Attendance and shift planning', 'Auto-matching crews to tasks'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
@@ -50,7 +50,7 @@ const modules: Module[] = [
     code: 'MOD-03',
     title: 'Equipment & machines',
     description:
-      'Know where every crane, mixer and excavator is, who is operating it, and when it idles — before it costs you.',
+      'Know where every crane, mixer and excavator is, who is operating it, and when it idles - before it costs you.',
     points: ['Utilization & idle-time alerts', 'Maintenance scheduling', 'Operator assignment & logs'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>

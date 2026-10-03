@@ -7,7 +7,7 @@ import type { FormEvent } from 'react';
  * The page's centerpiece: a "request a walkthrough" form styled as a site
  * work-order, paired with a sidebar that sets expectations (what happens next,
  * response time, office hours). The form is controlled and, on submit, swaps to
- * a logged-request confirmation — there is no backend yet, so it stays
+ * a logged-request confirmation - there is no backend yet, so it stays
  * client-side.
  */
 type FormState = {
@@ -42,7 +42,7 @@ const nextSteps = [
   {
     code: 'STEP 01',
     title: 'We read your request',
-    description: 'A real engineer reviews your project — not an auto-responder.',
+    description: 'A real engineer reviews your project - not an auto-responder.',
   },
   {
     code: 'STEP 02',
@@ -75,7 +75,7 @@ function ContactFormSection() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // No backend yet — acknowledge locally so the form is usable end to end.
+    // No backend yet - acknowledge locally so the form is usable end to end.
     setSubmitted(true);
   };
 

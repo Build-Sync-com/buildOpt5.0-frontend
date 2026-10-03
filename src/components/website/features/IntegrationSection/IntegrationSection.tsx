@@ -1,7 +1,7 @@
 /**
  * IntegrationSection
  *
- * Reinforces BuildOpt's core differentiator — the modules share one dataset.
+ * Reinforces BuildOpt's core differentiator - the modules share one dataset.
  * Rendered as a schematic "wiring diagram": four module nodes connected to a
  * central core, with a worked example of one change rippling outward.
  */
@@ -24,7 +24,7 @@ function IntegrationSection() {
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
           Approve a concrete pour and BuildOpt books the crew, draws down the
-          cement, assigns the mixer and advances the program — in a single move.
+          cement, assigns the mixer and advances the program - in a single move.
         </p>
 
         {/* Wiring diagram */}
@@ -76,7 +76,7 @@ function IntegrationSection() {
           </div>
 
           <p className="mt-8 font-medium text-xs tracking-widest text-gray-400">
-            FIG. 05 — ONE ACTION, FOUR MODULES UPDATED
+            FIG. 05 - ONE ACTION, FOUR MODULES UPDATED
           </p>
         </div>
       </div>

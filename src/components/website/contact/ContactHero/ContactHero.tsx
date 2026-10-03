@@ -68,7 +68,7 @@ function ContactHero() {
 
         <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-gray-600">
           Tell us about your project and we'll set up a walkthrough tailored to
-          how your team works. No sales scripts — just engineers who know the
+          how your team works. No sales scripts - just engineers who know the
           field.
         </p>
 

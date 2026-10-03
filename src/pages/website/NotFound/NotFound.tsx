@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 /**
- * NotFound (404) page — public website.
+ * NotFound (404) page - public website.
  *
  * Rendered for any URL that doesn't match a known route. Kept inside the
  * WebsiteLayout so the navbar/footer remain available to navigate back.

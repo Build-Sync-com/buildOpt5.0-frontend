@@ -160,7 +160,7 @@ function StockList({ stock, onOpen }: StockListProps) {
                       </span>
                     </span>
 
-                    {/* On hand — sits top-right on small screens */}
+                    {/* On hand - sits top-right on small screens */}
                     <span className="text-right md:text-left">
                       <span
                         className={`block font-semibold ${

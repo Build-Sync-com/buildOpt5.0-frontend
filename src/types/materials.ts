@@ -1,5 +1,5 @@
 /**
- * Materials store — domain types.
+ * Materials store - domain types.
  *
  * Every delivery that reaches site is recorded as a goods received note
  * (GRN). Each accepted line of a GRN becomes a batch of that material. Issues
@@ -85,7 +85,7 @@ export type Batch = {
   /** ISO date (yyyy-mm-dd). */
   receivedOn: string;
   supplier: string;
-  /** Accepted quantity — delivered minus rejected. */
+  /** Accepted quantity - delivered minus rejected. */
   quantityReceived: number;
   quantityRemaining: number;
   /** Price per unit in rupees; 0 when not known yet. */
@@ -109,7 +109,7 @@ export type ReceiptLine = {
   remarks?: string;
 };
 
-/** A goods received note — one delivery, one or more materials. */
+/** A goods received note - one delivery, one or more materials. */
 export type GoodsReceipt = {
   id: string;
   grnNo: number;
@@ -135,7 +135,7 @@ export type IssueLine = {
   draws: BatchDraw[];
 };
 
-/** A material issue note — stock handed over from the store to the work face. */
+/** A material issue note - stock handed over from the store to the work face. */
 export type MaterialIssue = {
   id: string;
   issueNo: number;

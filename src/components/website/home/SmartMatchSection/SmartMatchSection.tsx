@@ -41,7 +41,7 @@ function SmartMatchSection() {
             The right crew for every task, found in seconds
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Describe the task — BuildOpt ranks your entire workforce against it.
+            Describe the task - BuildOpt ranks your entire workforce against it.
             No more ringing around supervisors to find out who is free,
             qualified and nearby.
           </p>

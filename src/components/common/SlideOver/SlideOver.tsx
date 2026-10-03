@@ -20,7 +20,7 @@ type SlideOverProps = {
   /** `lg` gives forms with several columns more room. */
   size?: 'md' | 'lg';
   closeOnBackdrop?: boolean;
-  /** Pinned below the scrolling body — form buttons, totals. */
+  /** Pinned below the scrolling body - form buttons, totals. */
   footer?: ReactNode;
   children: ReactNode;
 };

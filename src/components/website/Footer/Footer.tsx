@@ -39,7 +39,7 @@ function Footer() {
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-gray-500">
-              All-in-one construction site management — labor, materials,
+              All-in-one construction site management - labor, materials,
               equipment and timelines in one intelligent command center.
             </p>
             <p className="mt-5 font-medium text-xs tracking-widest text-gray-400">

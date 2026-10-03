@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
  * FeaturesHero
  *
  * Intro band for the Features page. Copy and CTAs on the left; on the right a
- * drawing "legend" panel — the key that decodes the symbols on an engineering
- * sheet — used here to index the four capability families the page covers.
+ * drawing "legend" panel - the key that decodes the symbols on an engineering
+ * sheet - used here to index the four capability families the page covers.
  */
 const legend = [
   { tag: 'FEAT-01', label: 'Labor & crews', count: '12 tools' },
@@ -41,7 +41,7 @@ function FeaturesHero() {
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-600">
-              BuildOpt isn't four apps bolted together — it's one platform where
+              BuildOpt isn't four apps bolted together - it's one platform where
               labor, materials, equipment and the schedule share the same data.
               Here is what you get in each, and how it all connects.
             </p>

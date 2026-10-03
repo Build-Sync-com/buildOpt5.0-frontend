@@ -1,7 +1,7 @@
 /**
  * JourneySection
  *
- * Company milestones as a vertical "setting-out" line — markers pinned along a
+ * Company milestones as a vertical "setting-out" line - markers pinned along a
  * single blue axis (MS-01 … MS-04), echoing the timeline language used across
  * the product without repeating the home page's Gantt chart.
  */
@@ -26,7 +26,7 @@ const milestones: Milestone[] = [
     year: '2024',
     title: 'First pilot pour',
     description:
-      'BuildOpt ran its first live project — labor, materials and equipment tracked in one place, end to end, for a single contractor.',
+      'BuildOpt ran its first live project - labor, materials and equipment tracked in one place, end to end, for a single contractor.',
   },
   {
     code: 'MS-03',
@@ -40,7 +40,7 @@ const milestones: Milestone[] = [
     year: '2026',
     title: 'Site OS v5.0',
     description:
-      'The four modules became one connected platform — the command center construction teams run their whole site from today.',
+      'The four modules became one connected platform - the command center construction teams run their whole site from today.',
     accent: true,
   },
 ];
@@ -57,7 +57,7 @@ function JourneySection() {
             How we got here
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            From a sketch on a drawing to a platform running real sites — the
+            From a sketch on a drawing to a platform running real sites - the
             milestones along the way.
           </p>
         </div>
@@ -92,7 +92,7 @@ function JourneySection() {
         </ol>
 
         <p className="mt-12 text-center font-medium text-xs tracking-widest text-gray-400">
-          FIG. 03 — STILL UNDER CONSTRUCTION
+          FIG. 03 - STILL UNDER CONSTRUCTION
         </p>
       </div>
     </section>

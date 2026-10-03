@@ -11,7 +11,7 @@ import type { Session, SignInCredentials } from '../../types/auth';
  * `signIn` accepts any username/password after a short delay and keeps the
  * session in the browser: "keep me signed in" uses localStorage, otherwise it
  * lasts for the tab (sessionStorage). Replace the body of `signIn` with the
- * real API call when auth is wired up — the rest of the app only sees
+ * real API call when auth is wired up - the rest of the app only sees
  * `session`.
  */
 const STORAGE_KEY = 'buildopt.session';
@@ -43,7 +43,7 @@ function clearStoredSession() {
     localStorage.removeItem(STORAGE_KEY);
     sessionStorage.removeItem(STORAGE_KEY);
   } catch {
-    // Storage unavailable (e.g. blocked site data) — nothing to clear.
+    // Storage unavailable (e.g. blocked site data) - nothing to clear.
   }
 }
 
@@ -76,7 +76,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
           JSON.stringify(stored),
         );
       } catch {
-        // Storage unavailable — the session still lasts until a reload.
+        // Storage unavailable - the session still lasts until a reload.
       }
       setSession(next);
     },

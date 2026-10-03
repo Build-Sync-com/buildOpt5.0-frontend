@@ -1,7 +1,7 @@
 import PageHeader from '../../../components/webapp/layout/PageHeader/PageHeader';
 
 /**
- * Tasks — placeholder until the module is built.
+ * Tasks - placeholder until the module is built.
  */
 function Tasks() {
   return (

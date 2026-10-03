@@ -14,7 +14,7 @@ type Stat = {
   value: string;
   note: string;
   icon: IconName;
-  /** Amber icon to pull the eye — used when something needs action. */
+  /** Amber icon to pull the eye - used when something needs action. */
   alert?: boolean;
 };
 
