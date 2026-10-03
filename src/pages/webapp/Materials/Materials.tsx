@@ -19,13 +19,13 @@ import { compareFifo, summarizeStock } from '../../../utils/materials';
 import type { IssueDraft, ReceiptDraft } from '../../../types/materials';
 
 /**
- * Materials — the site store.
+ * Materials - the site store.
  *
  * Deliveries are received as goods received notes, each accepted item
  * becoming a batch; issues to the work face draw from the oldest batch first.
  * The stock tab shows what's on hand batch by batch; the received and issued
  * tabs are the store's paper trail. Only store roles (see
- * constants/materials.ts) can receive or issue — everyone else views.
+ * constants/materials.ts) can receive or issue - everyone else views.
  */
 type Tab = 'stock' | 'received' | 'issued';
 
@@ -87,13 +87,13 @@ function Materials() {
   const handleReceive = (draft: ReceiptDraft) => {
     const grnNo = receive(draft);
     const n = draft.lines.length;
-    setToast(`GRN ${grnNo} recorded — ${n} new ${n === 1 ? 'batch' : 'batches'} in store.`);
+    setToast(`GRN ${grnNo} recorded - ${n} new ${n === 1 ? 'batch' : 'batches'} in store.`);
     closeForm();
   };
 
   const handleIssue = (draft: IssueDraft) => {
     const issueNo = issue(draft);
-    setToast(`MIN ${issueNo} recorded — stock taken from the oldest batches first.`);
+    setToast(`MIN ${issueNo} recorded - stock taken from the oldest batches first.`);
     closeForm();
   };
 
@@ -107,7 +107,7 @@ function Materials() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <PageHeader
         title="Materials"
-        description="Deliveries in, issues out — every batch tracked first in, first out."
+        description="Deliveries in, issues out - every batch tracked first in, first out."
         actions={
           canManage && (
             <>

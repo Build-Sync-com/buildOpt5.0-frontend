@@ -4,7 +4,7 @@ import SignInForm from '../../../../components/webapp/auth/SignInForm/SignInForm
 import { getParty, getRoleById } from '../../../../constants/userRoles';
 
 /**
- * SignIn — sign-in step 2.
+ * SignIn - sign-in step 2.
  *
  * A single centered card: the role picked in step 1 (taken from the URL, so
  * /signin/project-manager can be bookmarked) with a way to change it, then the

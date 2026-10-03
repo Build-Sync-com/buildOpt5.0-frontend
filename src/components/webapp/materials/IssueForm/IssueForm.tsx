@@ -23,7 +23,7 @@ import type { IssueDraft, MaterialStock } from '../../../../types/materials';
  *
  * Material issue note: stock leaving the store for the work face. The store
  * keeper picks materials and quantities; the form shows which batches the
- * quantity will come from — oldest first — before anything is recorded.
+ * quantity will come from - oldest first - before anything is recorded.
  */
 type LineDraft = {
   key: string;
@@ -182,7 +182,7 @@ function IssueForm({
       <form id={formId} onSubmit={handleSubmit} noValidate>
         {hasErrors && (
           <p role="alert" className="mb-6 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
-            Some details are missing or more than the store holds — check the highlighted fields.
+            Some details are missing or more than the store holds - check the highlighted fields.
           </p>
         )}
 
@@ -299,7 +299,7 @@ function IssueForm({
                         .filter((s) => !takenElsewhere.has(s.material.id))
                         .map((s) => (
                           <option key={s.material.id} value={s.material.id}>
-                            {s.material.name} ({s.material.spec}) — {formatQuantity(s.onHand, s.material.unit)} in store
+                            {s.material.name} ({s.material.spec}) - {formatQuantity(s.onHand, s.material.unit)} in store
                           </option>
                         ))}
                     </select>
@@ -345,7 +345,7 @@ function IssueForm({
                               Received {formatDayMonth(batch.receivedOn)}
                               <span className="text-gray-400"> · GRN {batch.grnNo} · {batch.location}</span>
                               {useBy === 'expired' && (
-                                <span className="ml-2 text-xs font-medium text-red-600">Past use-by — check before use</span>
+                                <span className="ml-2 text-xs font-medium text-red-600">Past use-by - check before use</span>
                               )}
                               {useBy === 'soon' && (
                                 <span className="ml-2 text-xs font-medium text-orange-600">Use by soon</span>
@@ -367,7 +367,7 @@ function IssueForm({
                     {allocation && allocation.shortfall > 0 && (
                       <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-red-600">
                         <Icon name="triangleAlert" className="h-3.5 w-3.5" />
-                        {formatQuantity(allocation.shortfall, unitId)} short — the store doesn’t hold enough.
+                        {formatQuantity(allocation.shortfall, unitId)} short - the store doesn’t hold enough.
                       </p>
                     )}
                     {allocation && allocation.shortfall === 0 && (
@@ -378,7 +378,7 @@ function IssueForm({
                       >
                         Leaves {formatQuantity(leaves, unitId)} in store
                         {leaves <= item.material.reorderLevel &&
-                          ` — at or below the reorder level of ${formatQuantity(item.material.reorderLevel, unitId)}`}
+                          ` - at or below the reorder level of ${formatQuantity(item.material.reorderLevel, unitId)}`}
                       </p>
                     )}
                   </div>

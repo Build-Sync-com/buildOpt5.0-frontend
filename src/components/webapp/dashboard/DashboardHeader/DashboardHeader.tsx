@@ -36,7 +36,7 @@ function DashboardHeader({ session }: DashboardHeaderProps) {
         </h1>
         <p className="mt-1 text-gray-500">
           {role.title}
-          {role.qualifier ? ` (${role.qualifier})` : ''} workspace — here's
+          {role.qualifier ? ` (${role.qualifier})` : ''} workspace - here's
           where things stand today.
         </p>
       </div>

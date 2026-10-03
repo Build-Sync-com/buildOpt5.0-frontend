@@ -5,7 +5,7 @@ import IntegrationSection from '../../../components/website/features/Integration
 import CtaSection from '../../../components/website/home/CtaSection/CtaSection';
 
 /**
- * Features page — public website.
+ * Features page - public website.
  *
  * Composed of standalone sections (see components/website/features), reusing
  * the site's construction-blueprint language: intro with a drawing legend →

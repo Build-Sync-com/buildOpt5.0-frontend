@@ -1,4 +1,4 @@
-# BuildOpt — Frontend
+# BuildOpt - Frontend
 
 Web frontend for **BuildOpt**, a construction-site management system for tracking
 **laborers, materials, machines and equipment** across sites.
@@ -6,9 +6,9 @@ Web frontend for **BuildOpt**, a construction-site management system for trackin
 ## Tech stack
 
 - **React 19** + **TypeScript** (`.tsx`)
-- **Vite 8** — dev server & build
-- **React Router 7** — routing
-- Plain CSS with design tokens (CSS variables) — no UI framework yet
+- **Vite 8** - dev server & build
+- **React Router 7** - routing
+- Plain CSS with design tokens (CSS variables) - no UI framework yet
 
 ## Getting started
 
@@ -25,9 +25,9 @@ npm run lint     # run ESLint
 ```
 src/
   components/   Reusable UI: PageHeader, StatCard, DataTable, Badge
-  layout/       AppLayout — sidebar + topbar shell
+  layout/       AppLayout - sidebar + topbar shell
   pages/        Dashboard, Laborers, Materials, Machines, Equipment
-  data/         mockData.ts — sample data (to be replaced by the API)
+  data/         mockData.ts - sample data (to be replaced by the API)
   types/        Domain models (Laborer, Material, Machine, Equipment)
   App.tsx       Route definitions
   main.tsx      App entry / router provider
@@ -35,5 +35,5 @@ src/
 
 ## Status
 
-Early scaffold. Pages render against **mock data** for now — the next step is
+Early scaffold. Pages render against **mock data** for now - the next step is
 wiring them up to the backend API.

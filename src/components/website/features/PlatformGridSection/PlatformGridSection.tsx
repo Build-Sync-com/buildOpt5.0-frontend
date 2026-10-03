@@ -2,7 +2,7 @@
  * PlatformGridSection
  *
  * The capabilities that aren't tied to one module but run across the whole
- * platform — security, reporting, mobile, etc. — as numbered "drawing sheet"
+ * platform - security, reporting, mobile, etc. - as numbered "drawing sheet"
  * cards (SYS-01 … SYS-06), echoing the home/about card grids.
  */
 type Capability = {
@@ -44,7 +44,7 @@ const capabilities: Capability[] = [
     code: 'SYS-03',
     title: 'Roles & permissions',
     description:
-      'Foremen, QS, store keepers and directors each see exactly what they need — and nothing they should not.',
+      'Foremen, QS, store keepers and directors each see exactly what they need - and nothing they should not.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z" />
@@ -55,7 +55,7 @@ const capabilities: Capability[] = [
     code: 'SYS-04',
     title: 'Mobile field app',
     description:
-      'Log attendance, stock and progress from the site — works on a phone, syncs the moment a signal returns.',
+      'Log attendance, stock and progress from the site - works on a phone, syncs the moment a signal returns.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <rect x="5" y="2" width="14" height="20" rx="2" />
@@ -67,7 +67,7 @@ const capabilities: Capability[] = [
     code: 'SYS-05',
     title: 'Reports & exports',
     description:
-      'Daily site reports, cost statements and BOQ reconciliations generated in a click — export to PDF or Excel.',
+      'Daily site reports, cost statements and BOQ reconciliations generated in a click - export to PDF or Excel.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
@@ -81,7 +81,7 @@ const capabilities: Capability[] = [
     code: 'SYS-06',
     title: 'Audit trail',
     description:
-      'Every change is stamped with who, what and when — so disputes are settled with a record, not an argument.',
+      'Every change is stamped with who, what and when - so disputes are settled with a record, not an argument.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <path d="M12 8v4l3 2" />
@@ -103,7 +103,7 @@ function PlatformGridSection() {
             The plumbing that ties it all together
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            These run underneath every module — the reporting, security and
+            These run underneath every module - the reporting, security and
             field access that make BuildOpt safe to run a real project on.
           </p>
         </div>

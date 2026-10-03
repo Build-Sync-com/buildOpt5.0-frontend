@@ -1,7 +1,7 @@
 /**
  * TimelineSection
  *
- * "From groundbreak to handover" — the four project phases rendered as a
+ * "From groundbreak to handover" - the four project phases rendered as a
  * Gantt-style schedule: each phase is a row whose bar is offset along a
  * shared week grid, echoing the product's timeline module.
  */
@@ -64,7 +64,7 @@ function TimelineSection() {
             From groundbreak to handover, on schedule
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            BuildOpt follows the way construction actually runs — phase by
+            BuildOpt follows the way construction actually runs - phase by
             phase, with every resource synchronized to the program.
           </p>
         </div>
@@ -127,7 +127,7 @@ function TimelineSection() {
         </div>
 
         <p className="mt-6 text-center font-medium text-xs tracking-widest text-gray-400">
-          FIG. 02 — RESOURCES SYNCHRONIZED TO THE PROGRAM
+          FIG. 02 - RESOURCES SYNCHRONIZED TO THE PROGRAM
         </p>
       </div>
     </section>

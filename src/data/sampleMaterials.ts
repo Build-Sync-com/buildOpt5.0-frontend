@@ -139,7 +139,7 @@ export const sampleEvents: SampleEvent[] = [
     line('cement-opc', 300, 2420, 'Cement shed', {
       quantityRejected: 6,
       useBy: inDays(69),
-      remarks: '6 bags torn — returned with vehicle',
+      remarks: '6 bags torn - returned with vehicle',
     }),
   ], { vehicleNo: 'WP LJ-4521', purchaseOrder: 'PO 2026/131' }),
   receive(21, 'Nimal Sand & Metal', 'INV 7794', [

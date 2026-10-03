@@ -208,7 +208,7 @@ function TimelineScreen() {
       </ul>
       <p className="mt-4 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700">
         <span className="h-1.5 w-1.5 rotate-45 bg-amber-400" />
-        Delay on MEP first fix shifts Finishes by 3 days — flagged automatically.
+        Delay on MEP first fix shifts Finishes by 3 days - flagged automatically.
       </p>
     </ScreenFrame>
   );
@@ -231,7 +231,7 @@ const features: Feature[] = [
     eyebrow: '· LABOR & CREWS',
     title: 'Put the right people on every task',
     description:
-      'A living roster of every worker — their skills, certifications, attendance and rate — so assigning a crew takes seconds and never breaks a compliance rule.',
+      'A living roster of every worker - their skills, certifications, attendance and rate - so assigning a crew takes seconds and never breaks a compliance rule.',
     points: [
       'Skill & certification registry with expiry alerts',
       'SmartMatch ranks your workforce against each task',
@@ -259,7 +259,7 @@ const features: Feature[] = [
     eyebrow: '· EQUIPMENT & MACHINES',
     title: 'Stop paying for idle iron',
     description:
-      'See where every crane, mixer and excavator is, who is operating it and when it sits idle — so utilization goes up and surprise breakdowns go down.',
+      'See where every crane, mixer and excavator is, who is operating it and when it sits idle - so utilization goes up and surprise breakdowns go down.',
     points: [
       'Live utilization and idle-time alerts',
       'Preventive maintenance scheduling & logs',
@@ -296,7 +296,7 @@ function CoreFeaturesSection() {
             Four modules, explored in detail
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Each module is powerful on its own — but the real gain is that they
+            Each module is powerful on its own - but the real gain is that they
             share one set of data. A worker, a machine or a delay updates
             everywhere at once.
           </p>

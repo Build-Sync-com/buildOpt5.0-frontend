@@ -1,4 +1,4 @@
-# BuildOpt — Frontend
+# BuildOpt - Frontend
 
 BuildOpt is a system for running construction sites in one place. It covers labor management, materials, machinery and equipment, timelines and tasks, inspections, documents, and reports.
 

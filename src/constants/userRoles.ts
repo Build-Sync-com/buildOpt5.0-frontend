@@ -13,7 +13,7 @@ export const roleParties: RolePartyInfo[] = [
 ];
 
 export const userRoles: UserRole[] = [
-  // Contractor — site team
+  // Contractor - site team
   {
     id: 'project-manager',
     title: 'Project Manager',
@@ -75,7 +75,7 @@ export const userRoles: UserRole[] = [
     icon: 'warehouse',
   },
 
-  // Contractor — head office
+  // Contractor - head office
   {
     id: 'head-office-hr',
     title: 'HR',

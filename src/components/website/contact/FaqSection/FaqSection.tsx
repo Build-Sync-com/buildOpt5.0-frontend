@@ -11,13 +11,13 @@ const faqs = [
     code: 'QN-01',
     question: 'Do we need to change how our site already works?',
     answer:
-      "No. BuildOpt is built around the way construction actually runs — phases, crews, stores and machines. We map it to your existing process during the walkthrough rather than forcing a new one on you.",
+      "No. BuildOpt is built around the way construction actually runs - phases, crews, stores and machines. We map it to your existing process during the walkthrough rather than forcing a new one on you.",
   },
   {
     code: 'QN-02',
     question: 'Can the team use it from the field, not just the office?',
     answer:
-      'Yes. Attendance, stock and daily progress can be logged from a phone on site, and everything syncs back the moment a signal returns — so head office sees the same picture as the foreman.',
+      'Yes. Attendance, stock and daily progress can be logged from a phone on site, and everything syncs back the moment a signal returns - so head office sees the same picture as the foreman.',
   },
   {
     code: 'QN-03',
@@ -29,13 +29,13 @@ const faqs = [
     code: 'QN-04',
     question: 'Who can see what? We have sensitive cost data.',
     answer:
-      'Roles and permissions are granular. Foremen, store keepers, QS and directors each see exactly what they need — cost and commercial data stays with the people you choose.',
+      'Roles and permissions are granular. Foremen, store keepers, QS and directors each see exactly what they need - cost and commercial data stays with the people you choose.',
   },
   {
     code: 'QN-05',
     question: 'Is our data safe and exportable?',
     answer:
-      "Your data is yours. Every change is audit-stamped, and you can export reports, cost statements and records to PDF or Excel whenever you want — no lock-in.",
+      "Your data is yours. Every change is audit-stamped, and you can export reports, cost statements and records to PDF or Excel whenever you want - no lock-in.",
   },
 ];
 
@@ -53,7 +53,7 @@ function FaqSection() {
             Questions we hear a lot
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Still unsure about something? Put it in the form above — we're happy
+            Still unsure about something? Put it in the form above - we're happy
             to get into the detail.
           </p>
         </div>

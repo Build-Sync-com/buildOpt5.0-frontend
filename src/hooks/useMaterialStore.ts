@@ -25,7 +25,7 @@ import type {
  * goods received note and issue note. Receiving turns each accepted line into
  * a new batch; issuing draws from the oldest batches first.
  *
- * State lives in memory until the materials API exists — swap the reducer's
+ * State lives in memory until the materials API exists - swap the reducer's
  * callers for API calls then; the page only uses what this hook returns.
  */
 const FIRST_GRN_NO = 1031;

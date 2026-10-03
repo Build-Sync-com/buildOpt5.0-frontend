@@ -4,7 +4,7 @@ import WorkspaceModules from '../../../components/webapp/dashboard/WorkspaceModu
 import { useAuth } from '../../../context/auth/useAuth';
 
 /**
- * Dashboard — web app home after sign-in.
+ * Dashboard - web app home after sign-in.
  *
  * Kept simple for now: greeting, a site snapshot and the signed-in role's
  * workspace areas (see components/webapp/dashboard).

@@ -103,13 +103,13 @@ function AppSidebar({ mobileOpen, onClose }: AppSidebarProps) {
 
   return (
     <>
-      {/* Docked sidebar — large screens */}
+      {/* Docked sidebar - large screens */}
       <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] w-72 shrink-0 flex-col border-r border-gray-200 bg-white lg:flex">
         <SidebarNav sections={sections} />
         <SidebarRole role={role} tabCount={tabCount} />
       </aside>
 
-      {/* Drawer — small screens */}
+      {/* Drawer - small screens */}
       <div
         className={`fixed inset-0 z-50 lg:hidden ${mobileOpen ? '' : 'pointer-events-none'}`}
         inert={!mobileOpen}

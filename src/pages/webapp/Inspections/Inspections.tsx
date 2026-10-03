@@ -1,7 +1,7 @@
 import PageHeader from '../../../components/webapp/layout/PageHeader/PageHeader';
 
 /**
- * Inspections — placeholder until the module is built.
+ * Inspections - placeholder until the module is built.
  */
 function Inspections() {
   return (

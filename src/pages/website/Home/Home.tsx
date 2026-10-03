@@ -6,7 +6,7 @@ import TimelineSection from '../../../components/website/home/TimelineSection/Ti
 import CtaSection from '../../../components/website/home/CtaSection/CtaSection';
 
 /**
- * Home (landing) page — public website.
+ * Home (landing) page - public website.
  *
  * Composed of standalone sections (see components/website/home):
  * hero → capability marquee → core modules → smart matching spotlight →

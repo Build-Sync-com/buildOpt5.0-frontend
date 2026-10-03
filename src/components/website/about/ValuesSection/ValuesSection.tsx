@@ -18,7 +18,7 @@ const values: Value[] = [
     code: 'VAL-01',
     title: 'Built for the field',
     description:
-      'Designed alongside site engineers and foremen — not just for head office. If it does not work in mud and a hard hat, it does not ship.',
+      'Designed alongside site engineers and foremen - not just for head office. If it does not work in mud and a hard hat, it does not ship.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <path d="M2 18h20" />
@@ -32,7 +32,7 @@ const values: Value[] = [
     code: 'VAL-02',
     title: 'One source of truth',
     description:
-      'Every module talks to the others. No duplicate entry, no conflicting versions — one number everyone on the project can trust.',
+      'Every module talks to the others. No duplicate entry, no conflicting versions - one number everyone on the project can trust.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <circle cx="12" cy="12" r="3" />
@@ -49,7 +49,7 @@ const values: Value[] = [
     code: 'VAL-03',
     title: 'Decisions from data',
     description:
-      'Idle hours, wastage and delays become visible the moment they happen — so calls are made on live signals, not gut feel after the fact.',
+      'Idle hours, wastage and delays become visible the moment they happen - so calls are made on live signals, not gut feel after the fact.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <path d="M3 3v18h18" />
@@ -61,7 +61,7 @@ const values: Value[] = [
     code: 'VAL-04',
     title: 'Safety is structural',
     description:
-      'Certifications, compliance checks and safe assignments are baked into the workflow — never an afterthought bolted on at inspection time.',
+      'Certifications, compliance checks and safe assignments are baked into the workflow - never an afterthought bolted on at inspection time.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
         <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z" />
@@ -83,7 +83,7 @@ function ValuesSection() {
             The principles we pour the foundations on
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Four convictions shape every decision we make about the product —
+            Four convictions shape every decision we make about the product -
             from the smallest field interaction to how the whole platform fits
             together.
           </p>

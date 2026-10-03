@@ -1,7 +1,7 @@
 import PageHeader from '../../../components/webapp/layout/PageHeader/PageHeader';
 
 /**
- * Reports — placeholder until the module is built.
+ * Reports - placeholder until the module is built.
  */
 function Reports() {
   return (

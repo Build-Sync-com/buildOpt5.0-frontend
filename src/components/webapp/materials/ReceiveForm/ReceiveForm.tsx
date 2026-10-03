@@ -161,7 +161,7 @@ function validate(header: HeaderDraft, lines: LineDraft[], materials: Material[]
     else if (unit && !fitsUnit(rejected, unit)) errors[k('rejected')] = 'Check the decimals.';
     else if (delivered > 0 && rejected > delivered) errors[k('rejected')] = 'More than was delivered.';
     else if (delivered > 0 && rejected === delivered)
-      errors[k('rejected')] = 'All rejected — remove this item instead.';
+      errors[k('rejected')] = 'All rejected - remove this item instead.';
 
     if (line.unitCost.trim() && !(num(line.unitCost) >= 0)) errors[k('unitCost')] = 'Enter a valid price.';
     if (!line.location.trim()) errors[k('location')] = 'Where is it stored?';
@@ -313,7 +313,7 @@ function ReceiveForm({
       <form id={formId} onSubmit={handleSubmit} noValidate>
         {hasErrors && (
           <p role="alert" className="mb-6 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
-            Some details are missing or don’t add up — check the highlighted fields.
+            Some details are missing or don’t add up - check the highlighted fields.
           </p>
         )}
 
@@ -433,7 +433,7 @@ function ReceiveForm({
                       <optgroup key={group.id} label={group.label}>
                         {group.items.map((m) => (
                           <option key={m.id} value={m.id}>
-                            {m.name} — {m.spec}
+                            {m.name} - {m.spec}
                           </option>
                         ))}
                       </optgroup>
@@ -582,7 +582,7 @@ function ReceiveForm({
                   <div>
                     <p className="text-sm font-medium text-gray-700">Into stock</p>
                     <p className="mt-1.5 flex h-[38px] items-center rounded-lg bg-blue-50 px-3 text-sm font-semibold text-blue-700">
-                      {unitId && accepted > 0 ? formatQuantity(accepted, unitId) : '—'}
+                      {unitId && accepted > 0 ? formatQuantity(accepted, unitId) : '-'}
                     </p>
                   </div>
                   <FormField

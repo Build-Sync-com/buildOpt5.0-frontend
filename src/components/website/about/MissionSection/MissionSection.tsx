@@ -33,7 +33,7 @@ function MissionSection() {
           <p className="mt-4 text-lg text-gray-600">
             We're building BuildOpt so site teams stop stitching that picture
             together by hand. Every worker, machine, material and milestone in
-            one system — so a change anywhere updates the plan everywhere.
+            one system - so a change anywhere updates the plan everywhere.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ function MissionSection() {
           />
           <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-8 shadow-xl shadow-blue-900/5">
             <p className="font-medium text-xs tracking-widest text-gray-400">
-              TODAY — FRAGMENTED
+              TODAY - FRAGMENTED
             </p>
             <ul className="mt-4 space-y-2.5">
               {fragmented.map((item) => (
@@ -71,7 +71,7 @@ function MissionSection() {
               </span>
               <div>
                 <p className="font-semibold text-gray-900">
-                  BuildOpt — one command center
+                  BuildOpt - one command center
                 </p>
                 <p className="text-sm text-gray-600">
                   Labor, materials, equipment and timeline, in sync.

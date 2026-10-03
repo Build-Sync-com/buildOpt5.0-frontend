@@ -1,7 +1,7 @@
 import PageHeader from '../../../components/webapp/layout/PageHeader/PageHeader';
 
 /**
- * Labor — placeholder until the module is built.
+ * Labor - placeholder until the module is built.
  */
 function Labor() {
   return (

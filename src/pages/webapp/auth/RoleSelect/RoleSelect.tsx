@@ -6,7 +6,7 @@ import { getParty, getRolesByParty } from '../../../../constants/userRoles';
 import type { RoleParty } from '../../../../types/auth';
 
 /**
- * RoleSelect — sign-in step 1.
+ * RoleSelect - sign-in step 1.
  *
  * The user picks the role they hold on the project; each card continues to the
  * credentials step for that role. Contractor site roles fill the first band and

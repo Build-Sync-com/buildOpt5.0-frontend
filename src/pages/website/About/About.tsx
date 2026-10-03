@@ -5,7 +5,7 @@ import JourneySection from '../../../components/website/about/JourneySection/Jou
 import CtaSection from '../../../components/website/home/CtaSection/CtaSection';
 
 /**
- * About Us page — public website.
+ * About Us page - public website.
  *
  * Composed of standalone sections (see components/website/about), reusing the
  * site's construction-blueprint language: intro with a drawing title block →

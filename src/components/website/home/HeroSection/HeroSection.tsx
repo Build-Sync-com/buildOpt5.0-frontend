@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
  * HeroSection
  *
  * Light, blueprint-themed home hero. Copy and CTAs on the left; on the right a
- * schematic "one platform" diagram — a central BuildOpt hub wired to the four
+ * schematic "one platform" diagram - a central BuildOpt hub wired to the four
  * things every site juggles (labor, materials, equipment, timeline). It
  * introduces what the system *is* rather than faking live data.
  */

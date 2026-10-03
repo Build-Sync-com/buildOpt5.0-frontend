@@ -2,11 +2,11 @@
  * AboutHero
  *
  * Intro band for the About page. Copy on the left; on the right a drawing
- * "title block" — the boxed metadata stamp found in the corner of every
- * engineering sheet — used here as a spec card for the company itself.
+ * "title block" - the boxed metadata stamp found in the corner of every
+ * engineering sheet - used here as a spec card for the company itself.
  */
 const titleBlock = [
-  { field: 'PROJECT', value: 'BuildOpt — Site OS' },
+  { field: 'PROJECT', value: 'BuildOpt - Site OS' },
   { field: 'DISCIPLINE', value: 'Construction operations' },
   { field: 'FOUNDED', value: '2023 · on a jobsite' },
   { field: 'REVISION', value: 'v5.0' },
@@ -42,7 +42,7 @@ function AboutHero() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-600">
               BuildOpt started with a simple frustration: construction is planned
               on drawings, but run on radios, spreadsheets and gut feel. We set
-              out to give every site one command center — where labor, materials,
+              out to give every site one command center - where labor, materials,
               equipment and the schedule finally live together.
             </p>
 
