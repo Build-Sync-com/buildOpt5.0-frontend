@@ -70,3 +70,57 @@
 .animate-loader-blink {
   animation: loader-blink 1.4s ease-in-out infinite;
 }
+
+/* ---------------------------------------------------------------------------
+ * Web app helpers
+ * ------------------------------------------------------------------------- */
+
+/* Slide-over panels: backdrop fade and panel slide from the right. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-rise-in {
+  animation: rise-in 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-in-right,
+  .animate-rise-in {
+    animation: none;
+  }
+}
