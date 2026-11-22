@@ -112,6 +112,8 @@ export type Assignment = {
   endedOn?: string;
   assignedBy: string;
   note?: string;
+  /** The labour request (from the Tasks page) this allocation fills, if any. */
+  requestId?: string;
 };
 
 /** One worker's muster mark for one day. */
@@ -144,6 +146,8 @@ export type AllocationDraft = {
   expectedEnd?: string;
   note?: string;
   assignedBy: string;
+  /** Set when allocating against a labour request. */
+  requestId?: string;
 };
 
 /* ---------------------------------------------------------------------------

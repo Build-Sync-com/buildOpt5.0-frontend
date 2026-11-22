@@ -8,13 +8,24 @@ import IssueLog from '../../../components/webapp/materials/IssueLog/IssueLog';
 import MaterialPanel from '../../../components/webapp/materials/MaterialPanel/MaterialPanel';
 import ReceiveForm from '../../../components/webapp/materials/ReceiveForm/ReceiveForm';
 import IssueForm from '../../../components/webapp/materials/IssueForm/IssueForm';
+import IncomingRequests from '../../../components/webapp/requests/IncomingRequests/IncomingRequests';
 import {
   accentButtonClass,
   primaryButtonClass,
 } from '../../../components/webapp/materials/formStyles';
 import { materialStoreRoles } from '../../../constants/materials';
 import { useAuth } from '../../../context/auth/useAuth';
-import { useMaterialStore } from '../../../hooks/useMaterialStore';
+import { useTaskRequests } from '../../../context/taskRequests/useTaskRequests';
+import { useMaterials } from '../../../context/materials/useMaterials';
+import { useProgram } from '../../../hooks/useProgram';
+import {
+  hasUrgentRequest,
+  materialRequestCode,
+  materialRequestFill,
+  materialRequestItems,
+  requestStatusLabels,
+  sameRequestRef,
+} from '../../../utils/taskRequests';
 import { compareFifo, summarizeStock } from '../../../utils/materials';
 import type { IssueDraft, ReceiptDraft } from '../../../types/materials';
 
@@ -24,16 +35,19 @@ import type { IssueDraft, ReceiptDraft } from '../../../types/materials';
  * Deliveries are received as goods received notes, each accepted item
  * becoming a batch; issues to the work face draw from the oldest batch first.
  * The stock tab shows what's on hand batch by batch; the received and issued
- * tabs are the store's paper trail. Only store roles (see
+ * tabs are the store's paper trail, and the requests tab lists materials
+ * engineers have asked for from the Tasks page. Only store roles (see
  * constants/materials.ts) can receive or issue - everyone else views.
  */
-type Tab = 'stock' | 'received' | 'issued';
+type Tab = 'stock' | 'received' | 'issued' | 'requests';
 
 type OpenForm = {
   kind: 'receive' | 'issue';
   materialId?: string;
   /** Reopen this material's panel once the form closes. */
   returnToMaterial?: boolean;
+  /** Answering this material request. */
+  requestId?: string;
 };
 
 function uniqueSorted(values: (string | undefined)[]): string[] {
@@ -44,7 +58,7 @@ function uniqueSorted(values: (string | undefined)[]): string[] {
 
 function Materials() {
   const { session } = useAuth();
-  const { state, addMaterial, receive, issue } = useMaterialStore();
+  const { state, addMaterial, receive, issue } = useMaterials();
 
   const [tab, setTab] = useState<Tab>('stock');
   const [openMaterialId, setOpenMaterialId] = useState<string | null>(null);
@@ -58,6 +72,16 @@ function Materials() {
   }, [toast]);
 
   const stock = useMemo(() => summarizeStock(state), [state]);
+
+  // Materials requested from sub-tasks on the Tasks page.
+  const { materialRequests } = useTaskRequests();
+  const { tasks: programTasks } = useProgram();
+  const programById = useMemo(() => new Map(programTasks.map((t) => [t.id, t])), [programTasks]);
+  const requestItems = useMemo(
+    () => materialRequestItems(materialRequests, programById, state),
+    [materialRequests, programById, state],
+  );
+
   const suppliers = useMemo(() => uniqueSorted(state.receipts.map((r) => r.supplier)), [state.receipts]);
   const workAreas = useMemo(() => uniqueSorted(state.issues.map((i) => i.workArea)), [state.issues]);
   const people = useMemo(() => uniqueSorted(state.issues.map((i) => i.issuedTo)), [state.issues]);
@@ -93,14 +117,33 @@ function Materials() {
 
   const handleIssue = (draft: IssueDraft) => {
     const issueNo = issue(draft);
-    setToast(`MIN ${issueNo} recorded - stock taken from the oldest batches first.`);
+    // An issue quoting a request number counts towards that request.
+    const request = materialRequests.find((r) => sameRequestRef(draft.requestRef, materialRequestCode(r.requestNo)));
+    if (request) {
+      const fill = materialRequestFill(request, {
+        ...state,
+        issues: [...state.issues, { ...draft, id: '', issueNo, lines: draft.lines.map((l) => ({ ...l, draws: [] })) }],
+      });
+      setToast(
+        `MIN ${issueNo} recorded against ${materialRequestCode(request.requestNo)} - ${requestStatusLabels[
+          fill.status
+        ].toLowerCase()}.`,
+      );
+    } else {
+      setToast(`MIN ${issueNo} recorded - stock taken from the oldest batches first.`);
+    }
     closeForm();
   };
 
-  const tabs: { id: Tab; label: string; count: number }[] = [
+  const formRequest =
+    form?.kind === 'issue' && form.requestId ? materialRequests.find((r) => r.id === form.requestId) : undefined;
+  const formFill = formRequest ? materialRequestFill(formRequest, state) : undefined;
+
+  const tabs: { id: Tab; label: string; count: number; alert?: boolean }[] = [
     { id: 'stock', label: 'Stock', count: stock.length },
     { id: 'received', label: 'Received', count: state.receipts.length },
     { id: 'issued', label: 'Issued', count: state.issues.length },
+    { id: 'requests', label: 'Requests', count: requestItems.length, alert: hasUrgentRequest(requestItems) },
   ];
 
   return (
@@ -142,7 +185,7 @@ function Materials() {
       <MaterialsStats stock={stock} />
 
       {/* Tabs */}
-      <div className="mt-10 border-b border-gray-200" role="tablist" aria-label="Materials views">
+      <div className="mt-10 overflow-x-auto border-b border-gray-200" role="tablist" aria-label="Materials views">
         <div className="-mb-px flex gap-6">
           {tabs.map((t) => (
             <button
@@ -153,7 +196,7 @@ function Materials() {
               aria-selected={tab === t.id}
               aria-controls={`materials-panel-${t.id}`}
               onClick={() => setTab(t.id)}
-              className={`inline-flex items-center gap-2 border-b-2 px-0.5 pb-3 text-sm font-semibold transition-colors ${
+              className={`inline-flex shrink-0 items-center gap-2 border-b-2 px-0.5 pb-3 text-sm font-semibold whitespace-nowrap transition-colors ${
                 tab === t.id
                   ? 'border-blue-600 text-blue-700'
                   : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-900'
@@ -162,7 +205,11 @@ function Materials() {
               {t.label}
               <span
                 className={`rounded-full px-2 py-0.5 text-xs ${
-                  tab === t.id ? 'bg-blue-50 text-blue-700' : 'bg-gray-100 text-gray-500'
+                  t.alert
+                    ? 'bg-amber-100 text-amber-800'
+                    : tab === t.id
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'bg-gray-100 text-gray-500'
                 }`}
               >
                 {t.count}
@@ -181,6 +228,26 @@ function Materials() {
         {tab === 'stock' && <StockList stock={stock} onOpen={setOpenMaterialId} />}
         {tab === 'received' && <ReceiptLog state={state} onOpenMaterial={setOpenMaterialId} />}
         {tab === 'issued' && <IssueLog state={state} onOpenMaterial={setOpenMaterialId} />}
+        {tab === 'requests' && (
+          <IncomingRequests
+            items={requestItems}
+            emptyTitle="No material requests"
+            emptyText="Engineers request materials for a sub-task from the Tasks page. Their requests show up here."
+            renderActions={(item) =>
+              canManage &&
+              item.status !== 'filled' && (
+                <button
+                  type="button"
+                  onClick={() => setForm({ kind: 'issue', requestId: item.id })}
+                  className={`${accentButtonClass} px-3 py-1.5`}
+                >
+                  <Icon name="arrowUpFromLine" className="h-4 w-4" />
+                  Issue stock
+                </button>
+              )
+            }
+          />
+        )}
       </div>
 
       <MaterialPanel
@@ -211,6 +278,15 @@ function Materials() {
           people={people}
           issuedBy={session.username}
           initialMaterialId={form.materialId}
+          request={
+            formRequest &&
+            formFill && {
+              code: materialRequestCode(formRequest.requestNo),
+              deliverTo: formRequest.deliverTo,
+              purpose: programById.get(formRequest.taskId)?.name ?? '',
+              lines: formFill.lines,
+            }
+          }
           onSubmit={handleIssue}
           onClose={closeForm}
         />

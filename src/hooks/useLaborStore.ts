@@ -83,6 +83,7 @@ function reducer(state: LaborState, action: Action): LaborState {
           expectedEnd: draft.expectedEnd,
           note: draft.note,
           assignedBy: draft.assignedBy,
+          requestId: draft.requestId,
         }));
       return { ...state, assignments: [...assignments, ...added] };
     }

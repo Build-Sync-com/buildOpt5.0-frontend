@@ -8,11 +8,22 @@ import WorkFronts from '../../../components/webapp/labor/WorkFronts/WorkFronts';
 import WorkerPanel from '../../../components/webapp/labor/WorkerPanel/WorkerPanel';
 import WorkerForm from '../../../components/webapp/labor/WorkerForm/WorkerForm';
 import AllocateForm from '../../../components/webapp/labor/AllocateForm/AllocateForm';
+import IncomingRequests from '../../../components/webapp/requests/IncomingRequests/IncomingRequests';
+import { useTaskRequests } from '../../../context/taskRequests/useTaskRequests';
+import { useProgram } from '../../../hooks/useProgram';
+import {
+  hasUrgentRequest,
+  laborRequestCode,
+  laborRequestFill,
+  laborRequestItems,
+  requestStatusLabels,
+} from '../../../utils/taskRequests';
 import { accentButtonClass, primaryButtonClass } from '../../../components/webapp/materials/formStyles';
 import { activitySuggestions, laborRoles, locationSuggestions } from '../../../constants/labor';
 import { useAuth } from '../../../context/auth/useAuth';
-import { useLaborStore } from '../../../hooks/useLaborStore';
+import { useLabor } from '../../../context/labor/useLabor';
 import { groupWorkFronts, summarizeWorkers, tradeMix, workerCode } from '../../../utils/labor';
+import { taskPath } from '../../../utils/program';
 import { formatDate, todayISO } from '../../../utils/materials';
 import type { AllocationDraft, WorkFront, WorkerDraft, WorkerRelease } from '../../../types/labor';
 
@@ -25,11 +36,18 @@ import type { AllocationDraft, WorkFront, WorkerDraft, WorkerRelease } from '../
  * what they're doing today. Only the roles in constants/labor.ts record
  * anything - everyone else views.
  */
-type Tab = 'workforce' | 'muster' | 'allocation';
+type Tab = 'workforce' | 'muster' | 'allocation' | 'requests';
 
 type OpenForm =
   | { kind: 'worker'; workerId?: string }
-  | { kind: 'allocate'; workerIds?: string[]; activity?: string; location?: string };
+  | {
+      kind: 'allocate';
+      workerIds?: string[];
+      activity?: string;
+      location?: string;
+      /** Filling this labour request. */
+      requestId?: string;
+    };
 
 function uniqueSorted(values: (string | undefined)[]): string[] {
   return [...new Set(values.filter((v): v is string => Boolean(v)))].sort((a, b) => a.localeCompare(b));
@@ -38,7 +56,7 @@ function uniqueSorted(values: (string | undefined)[]): string[] {
 function Labor() {
   const { session } = useAuth();
   const { state, addWorker, updateWorker, releaseWorker, allocate, endJobs, markAttendance, unmarkAttendance } =
-    useLaborStore();
+    useLabor();
 
   const [tab, setTab] = useState<Tab>('workforce');
   const [openWorkerId, setOpenWorkerId] = useState<string | null>(null);
@@ -52,6 +70,15 @@ function Labor() {
     const timer = setTimeout(() => setToast(null), 4500);
     return () => clearTimeout(timer);
   }, [toast]);
+
+  // Labour requested from sub-tasks on the Tasks page.
+  const { laborRequests } = useTaskRequests();
+  const { tasks: programTasks } = useProgram();
+  const programById = useMemo(() => new Map(programTasks.map((t) => [t.id, t])), [programTasks]);
+  const requestItems = useMemo(
+    () => laborRequestItems(laborRequests, programById, state),
+    [laborRequests, programById, state],
+  );
 
   const workers = useMemo(() => summarizeWorkers(state), [state]);
   const fronts = useMemo(() => groupWorkFronts(workers), [workers]);
@@ -107,9 +134,41 @@ function Labor() {
     allocate(draft);
     const picked = workers.filter((w) => draft.workerIds.includes(w.worker.id));
     const who = picked.length === 1 ? nameOf(picked[0].worker.id) : tradeMix(picked);
-    setToast(`${who} on ${draft.activity.toLowerCase()} at ${draft.location}.`);
+    const request = draft.requestId ? laborRequests.find((r) => r.id === draft.requestId) : undefined;
+    if (request) {
+      // Where the request stands once these allocations are in.
+      const fill = laborRequestFill(request, {
+        ...state,
+        assignments: [
+          ...state.assignments,
+          ...draft.workerIds.map((workerId) => ({ ...draft, id: '', workerId })),
+        ],
+      });
+      setToast(
+        `${who} allocated to ${laborRequestCode(request.requestNo)} - ${requestStatusLabels[fill.status].toLowerCase()}.`,
+      );
+    } else {
+      setToast(`${who} on ${draft.activity.toLowerCase()} at ${draft.location}.`);
+    }
     closeForm();
   };
+
+  /** Open the allocation form set up to fill a labour request. */
+  const allocateForRequest = (requestId: string) => {
+    const request = laborRequests.find((r) => r.id === requestId);
+    if (!request) return;
+    const task = programById.get(request.taskId);
+    const path = task ? taskPath(programById, task) : [];
+    setForm({
+      kind: 'allocate',
+      requestId,
+      activity: task?.name,
+      // The section, e.g. "Block A" - the engineer can narrow it to the exact spot.
+      location: path[0],
+    });
+  };
+  const formRequest =
+    form?.kind === 'allocate' && form.requestId ? laborRequests.find((r) => r.id === form.requestId) : undefined;
 
   const handleFree = (assignmentId: string) => {
     endJobs([assignmentId], todayISO());
@@ -138,6 +197,7 @@ function Labor() {
     { id: 'workforce', label: 'Workforce', count: active.length },
     { id: 'muster', label: 'Attendance', count: unmarked, alert: unmarked > 0 },
     { id: 'allocation', label: 'Work allocation', count: fronts.length },
+    { id: 'requests', label: 'Requests', count: requestItems.length, alert: hasUrgentRequest(requestItems) },
   ];
 
   return (
@@ -229,6 +289,26 @@ function Labor() {
             onFinish={handleFinish}
           />
         )}
+        {tab === 'requests' && (
+          <IncomingRequests
+            items={requestItems}
+            emptyTitle="No labour requests"
+            emptyText="Engineers request workers for a sub-task from the Tasks page. Their requests show up here."
+            renderActions={(item) =>
+              canManage &&
+              item.status !== 'filled' && (
+                <button
+                  type="button"
+                  onClick={() => allocateForRequest(item.id)}
+                  className={`${accentButtonClass} px-3 py-1.5`}
+                >
+                  <Icon name="arrowRightLeft" className="h-4 w-4" />
+                  Allocate workers
+                </button>
+              )
+            }
+          />
+        )}
       </div>
 
       <WorkerPanel
@@ -260,6 +340,17 @@ function Labor() {
           initialWorkerIds={form.workerIds}
           initialActivity={form.activity}
           initialLocation={form.location}
+          initialStartedOn={formRequest && formRequest.neededFrom > todayISO() ? formRequest.neededFrom : undefined}
+          initialExpectedEnd={formRequest?.neededTo}
+          request={
+            formRequest && {
+              requestId: formRequest.id,
+              code: laborRequestCode(formRequest.requestNo),
+              fill: laborRequestFill(formRequest, state),
+              neededFrom: formRequest.neededFrom,
+              neededTo: formRequest.neededTo,
+            }
+          }
           onSubmit={handleAllocate}
           onClose={closeForm}
         />

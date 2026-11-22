@@ -10,6 +10,7 @@ import { MUSTER_EDIT_DAYS, getTrade, trades } from '../../../../constants/labor'
 import { compareWorkers, tradeMix, workFrontKey, workerCode } from '../../../../utils/labor';
 import { addDays, formatDayMonth, todayISO } from '../../../../utils/materials';
 import type { AllocationDraft, TradeId, WorkerSummary } from '../../../../types/labor';
+import type { LaborRequestFill } from '../../../../types/taskRequests';
 
 /**
  * AllocateForm
@@ -17,7 +18,22 @@ import type { AllocationDraft, TradeId, WorkerSummary } from '../../../../types/
  * Puts workers on a job: an activity at a work front. Free workers are
  * listed first; picking someone already on another job moves them, and
  * the form says so before it's saved.
+ *
+ * Opened from a labour request, it fills that request: the job and dates
+ * come from the request, its trades are listed first, and a tally shows
+ * each trade's progress as workers are picked. The new allocations carry
+ * the request's id, which is how the request knows it's been filled.
  */
+
+/** The labour request being filled, when opened from one. */
+export type AllocateRequest = {
+  requestId: string;
+  /** "LR-301". */
+  code: string;
+  fill: LaborRequestFill;
+  neededFrom: string;
+  neededTo: string;
+};
 type AllocateFormProps = {
   workers: WorkerSummary[];
   activities: string[];
@@ -26,6 +42,9 @@ type AllocateFormProps = {
   initialWorkerIds?: string[];
   initialActivity?: string;
   initialLocation?: string;
+  initialStartedOn?: string;
+  initialExpectedEnd?: string;
+  request?: AllocateRequest;
   onSubmit: (draft: AllocationDraft) => void;
   onClose: () => void;
 };
@@ -50,6 +69,9 @@ function AllocateForm({
   initialWorkerIds = [],
   initialActivity = '',
   initialLocation = '',
+  initialStartedOn,
+  initialExpectedEnd,
+  request,
   onSubmit,
   onClose,
 }: AllocateFormProps) {
@@ -60,8 +82,8 @@ function AllocateForm({
   const [header, setHeader] = useState<Header>({
     activity: initialActivity,
     location: initialLocation,
-    startedOn: today,
-    expectedEnd: '',
+    startedOn: initialStartedOn ?? today,
+    expectedEnd: initialExpectedEnd ?? '',
     note: '',
   });
   const [selected, setSelected] = useState<Set<string>>(() => new Set(initialWorkerIds));
@@ -69,7 +91,15 @@ function AllocateForm({
   const [query, setQuery] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const active = useMemo(() => workers.filter((w) => !w.worker.release).sort(compareWorkers), [workers]);
+  // A request's trades come first, so the right workers are at the top of each group.
+  const active = useMemo(() => {
+    const wanted = new Set(request?.fill.lines.map((l) => l.trade));
+    return workers
+      .filter((w) => !w.worker.release)
+      .sort((a, b) => Number(wanted.has(b.worker.trade)) - Number(wanted.has(a.worker.trade)) || compareWorkers(a, b));
+  }, [workers, request]);
+  // Starting up to a week ahead, or on the day a request needs them.
+  const latestStart = request && request.neededFrom > addDays(today, 7) ? request.neededFrom : addDays(today, 7);
   const key = header.activity.trim() && header.location.trim() ? workFrontKey(header.activity, header.location) : null;
   const onThisJob = (w: WorkerSummary) =>
     Boolean(key && w.assignment && workFrontKey(w.assignment.activity, w.assignment.location) === key);
@@ -106,7 +136,7 @@ function AllocateForm({
     const earliest = addDays(today, -MUSTER_EDIT_DAYS);
     if (!header.startedOn) e.startedOn = 'Enter the date.';
     else if (header.startedOn < earliest) e.startedOn = `No more than ${MUSTER_EDIT_DAYS} days back.`;
-    else if (header.startedOn > addDays(today, 7)) e.startedOn = 'No more than a week ahead.';
+    else if (header.startedOn > latestStart) e.startedOn = request ? 'After the request needs them.' : 'No more than a week ahead.';
     if (header.expectedEnd && header.startedOn && header.expectedEnd < header.startedOn) {
       e.expectedEnd = 'Before it starts.';
     }
@@ -147,10 +177,21 @@ function AllocateForm({
       expectedEnd: header.expectedEnd || undefined,
       note: header.note.trim() || undefined,
       assignedBy,
+      requestId: request?.requestId,
     });
   };
 
   const adding = chosen.filter((w) => !onThisJob(w));
+  // Per requested trade: allocated before, plus picked now (not already on the request).
+  const tally = request?.fill.lines.map((l) => {
+    const picked = adding.filter(
+      (w) => w.worker.trade === l.trade && !request.fill.workerIds.includes(w.worker.id),
+    ).length;
+    return { ...l, picked, total: l.allocated + picked };
+  });
+  const offRequest = request
+    ? adding.filter((w) => !request.fill.lines.some((l) => l.trade === w.worker.trade)).length
+    : 0;
   const tradesOnSite = trades.filter((t) => active.some((w) => w.worker.trade === t.id));
 
   return (
@@ -159,9 +200,13 @@ function AllocateForm({
       onClose={onClose}
       size="lg"
       closeOnBackdrop={false}
-      eyebrow="Work allocation"
+      eyebrow={request ? `Filling ${request.code}` : 'Work allocation'}
       title="Allocate workers"
-      description="Put workers on an activity at a work front. They stay on it until moved or the job is finished."
+      description={
+        request
+          ? 'Put workers on the requested sub-task. Each one counts towards the request.'
+          : 'Put workers on an activity at a work front. They stay on it until moved or the job is finished.'
+      }
       footer={
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0 text-sm">
@@ -191,6 +236,50 @@ function AllocateForm({
               ? errors.workers
               : 'Some details are missing - check the highlighted fields.'}
           </p>
+        )}
+
+        {tally && request && (
+          <div className="mb-8 rounded-2xl border border-blue-200 bg-blue-50/60 p-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <p className="text-sm font-semibold text-gray-900">{request.code} asks for</p>
+              <p className="text-xs text-gray-500">
+                {formatDayMonth(request.neededFrom)}
+                {request.neededTo !== request.neededFrom && <> – {formatDayMonth(request.neededTo)}</>}
+              </p>
+            </div>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {tally.map((l) => {
+                const done = l.total >= l.requested;
+                return (
+                  <li
+                    key={l.trade}
+                    className="flex items-center justify-between gap-3 rounded-xl bg-white px-3 py-2 text-sm"
+                  >
+                    <span className="flex min-w-0 items-center gap-2">
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                          done ? 'bg-blue-600 text-white' : 'border border-gray-300 text-transparent'
+                        }`}
+                      >
+                        <Icon name="check" className="h-3 w-3" strokeWidth={2.5} />
+                      </span>
+                      <span className="truncate text-gray-900">{getTrade(l.trade).label}</span>
+                    </span>
+                    <span className={`shrink-0 font-semibold ${done ? 'text-blue-700' : 'text-gray-700'}`}>
+                      {l.total}/{l.requested}
+                      {l.picked > 0 && <span className="ml-1 text-xs font-normal text-gray-400">(+{l.picked})</span>}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+            {offRequest > 0 && (
+              <p className="mt-3 text-xs text-gray-500">
+                {offRequest} picked {offRequest === 1 ? 'isn’t' : 'aren’t'} a requested trade - they’ll go on the job
+                but won’t count towards the request.
+              </p>
+            )}
+          </div>
         )}
 
         <SectionHeading title="The job" />
@@ -234,7 +323,7 @@ function AllocateForm({
               id="al-start"
               type="date"
               min={addDays(today, -MUSTER_EDIT_DAYS)}
-              max={addDays(today, 7)}
+              max={latestStart}
               value={header.startedOn}
               onChange={(e) => updateHeader({ startedOn: e.target.value })}
               aria-invalid={Boolean(errors.startedOn)}
