@@ -198,9 +198,27 @@ export type ToolCheckout = {
   /** Date the tools should be back in the store. */
   dueBack: string;
   issuedBy: string;
+  /** Equipment request number the slip answers, if any (e.g. EQ-701). */
+  requestRef?: string;
   lines: CheckoutLine[];
   /** Set once the tools come back; closes the slip. */
   checkIn?: ToolCheckIn;
+};
+
+/**
+ * A machine put on an equipment request (raised from the Tasks page) for a
+ * span of days. This is how a request's machine lines get filled.
+ */
+export type MachineAssignment = {
+  id: string;
+  machineId: string;
+  /** The request number it answers, e.g. EQ-701. */
+  requestRef: string;
+  fromDate: string;
+  toDate: string;
+  assignedOn: string;
+  assignedBy: string;
+  note?: string;
 };
 
 /* ---------------------------------------------------------------------------
@@ -230,6 +248,13 @@ export type MachineLogDraft = Omit<MachineLog, 'id' | 'sequence'>;
 
 export type CheckoutDraft = Omit<ToolCheckout, 'id' | 'slipNo' | 'checkIn'>;
 
+/** Several machines put on one request at once. */
+export type MachineAssignmentDraft = Omit<MachineAssignment, 'id' | 'machineId' | 'assignedOn'> & {
+  machineIds: string[];
+  /** What they're for, for the machine log, e.g. "Retaining wall excavation (Car park)". */
+  purpose: string;
+};
+
 export type MachineryState = {
   machines: Machine[];
   logs: MachineLog[];
@@ -238,6 +263,7 @@ export type MachineryState = {
   receipts: EquipmentReceipt[];
   returns: EquipmentReturn[];
   checkouts: ToolCheckout[];
+  assignments: MachineAssignment[];
 };
 
 /* ---------------------------------------------------------------------------

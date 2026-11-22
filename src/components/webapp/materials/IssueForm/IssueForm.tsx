@@ -24,7 +24,24 @@ import type { IssueDraft, MaterialStock } from '../../../../types/materials';
  * Material issue note: stock leaving the store for the work face. The store
  * keeper picks materials and quantities; the form shows which batches the
  * quantity will come from - oldest first - before anything is recorded.
+ *
+ * Opened from a material request, it answers that request: the request
+ * number, work area and purpose are filled in, each requested material
+ * starts at what's still outstanding (as much as the store holds), and a
+ * summary shows what's been issued against the request so far. The issue
+ * note quotes the request number, which is how the request knows it's been
+ * filled.
  */
+
+/** The material request being answered, when opened from one. */
+export type IssueRequest = {
+  /** "MR-501". */
+  code: string;
+  deliverTo: string;
+  /** The sub-task it's for. */
+  purpose: string;
+  lines: { materialId: string; requested: number; issued: number }[];
+};
 type LineDraft = {
   key: string;
   materialId: string;
@@ -47,6 +64,7 @@ type IssueFormProps = {
   people: string[];
   issuedBy: string;
   initialMaterialId?: string;
+  request?: IssueRequest;
   onSubmit: (draft: IssueDraft) => void;
   onClose: () => void;
 };
@@ -93,6 +111,7 @@ function IssueForm({
   people,
   issuedBy,
   initialMaterialId,
+  request,
   onSubmit,
   onClose,
 }: IssueFormProps) {
@@ -111,18 +130,28 @@ function IssueForm({
 
   const [header, setHeader] = useState<HeaderDraft>({
     issuedOn: today,
-    workArea: '',
+    workArea: request?.deliverTo ?? '',
     issuedTo: '',
-    purpose: '',
-    requestRef: '',
+    purpose: request?.purpose ?? '',
+    requestRef: request?.code ?? '',
   });
-  const [lines, setLines] = useState<LineDraft[]>(() => [
-    {
-      key: newId(),
-      materialId: initialMaterialId && stockById.get(initialMaterialId)?.onHand ? initialMaterialId : '',
-      quantity: '',
-    },
-  ]);
+  const [lines, setLines] = useState<LineDraft[]>(() => {
+    // From a request: each material still outstanding, as much as the store holds.
+    const fromRequest = (request?.lines ?? []).flatMap((l) => {
+      const onHand = stockById.get(l.materialId)?.onHand ?? 0;
+      const outstanding = roundQty(l.requested - l.issued);
+      if (outstanding <= 0 || onHand <= 0) return [];
+      return [{ key: newId(), materialId: l.materialId, quantity: String(roundQty(Math.min(outstanding, onHand))) }];
+    });
+    if (fromRequest.length) return fromRequest;
+    return [
+      {
+        key: newId(),
+        materialId: initialMaterialId && stockById.get(initialMaterialId)?.onHand ? initialMaterialId : '',
+        quantity: '',
+      },
+    ];
+  });
   const [submitted, setSubmitted] = useState(false);
 
   const errors = submitted ? validate(header, lines, stockById) : {};
@@ -156,9 +185,13 @@ function IssueForm({
       onClose={onClose}
       size="lg"
       closeOnBackdrop={false}
-      eyebrow="Material issue note"
+      eyebrow={request ? `Answering ${request.code}` : 'Material issue note'}
       title="Issue materials"
-      description="Hand stock over to the work face. Quantities come out of the oldest batches first."
+      description={
+        request
+          ? 'Issue the requested stock. Quantities come out of the oldest batches first.'
+          : 'Hand stock over to the work face. Quantities come out of the oldest batches first.'
+      }
       footer={
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm">
@@ -184,6 +217,50 @@ function IssueForm({
           <p role="alert" className="mb-6 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
             Some details are missing or more than the store holds - check the highlighted fields.
           </p>
+        )}
+
+        {/* The request being answered */}
+        {request && (
+          <div className="mb-8 rounded-2xl border border-blue-200 bg-blue-50/60 p-4">
+            <p className="text-sm font-semibold text-gray-900">{request.code} asks for</p>
+            <ul className="mt-3 space-y-2">
+              {request.lines.map((l) => {
+                const item = stockById.get(l.materialId);
+                if (!item) return null;
+                const unitId = item.material.unit;
+                const thisIssue = lines
+                  .filter((x) => x.materialId === l.materialId)
+                  .reduce((sum, x) => sum + (num(x.quantity) > 0 ? num(x.quantity) : 0), 0);
+                const total = roundQty(l.issued + thisIssue);
+                const done = total >= l.requested;
+                const noStock = !done && item.onHand <= 0;
+                return (
+                  <li
+                    key={l.materialId}
+                    className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-xl bg-white px-3 py-2 text-sm"
+                  >
+                    <span className="flex min-w-0 items-center gap-2">
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                          done ? 'bg-blue-600 text-white' : 'border border-gray-300 text-transparent'
+                        }`}
+                      >
+                        <Icon name="check" className="h-3 w-3" strokeWidth={2.5} />
+                      </span>
+                      <span className="truncate text-gray-900">{item.material.name}</span>
+                    </span>
+                    <span className="text-right text-xs text-gray-500">
+                      <span className={`text-sm font-semibold ${done ? 'text-blue-700' : 'text-gray-900'}`}>
+                        {formatQuantity(total, unitId)} of {formatQuantity(l.requested, unitId)}
+                      </span>
+                      {l.issued > 0 && <> · {formatQuantity(l.issued, unitId)} issued before</>}
+                      {noStock && <span className="font-medium text-red-600"> · none in store - order it</span>}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
 
         {/* Issue details */}

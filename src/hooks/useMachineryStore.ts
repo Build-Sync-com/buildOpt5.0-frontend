@@ -10,6 +10,8 @@ import type {
   EquipmentReturn,
   EquipmentReturnDraft,
   Machine,
+  MachineAssignment,
+  MachineAssignmentDraft,
   MachineLog,
   MachineLogDraft,
   MachineryState,
@@ -41,7 +43,8 @@ type Action =
   | { type: 'extend'; logId: string; machineId: string; dueBack: string; date: string; loggedBy: string }
   | { type: 'return'; id: string; draft: EquipmentReturnDraft }
   | { type: 'checkout'; id: string; draft: CheckoutDraft }
-  | { type: 'checkIn'; checkoutId: string; checkIn: ToolCheckIn };
+  | { type: 'checkIn'; checkoutId: string; checkIn: ToolCheckIn }
+  | { type: 'assign'; ids: string[]; logIds: string[]; date: string; draft: MachineAssignmentDraft };
 
 function currentStatus(state: MachineryState, machineId: string) {
   const latest = state.logs
@@ -166,6 +169,32 @@ function reducer(state: MachineryState, action: Action): MachineryState {
           c.id === action.checkoutId && !c.checkIn ? { ...c, checkIn: action.checkIn } : c,
         ),
       };
+
+    case 'assign': {
+      const { draft } = action;
+      const { machineIds, purpose, ...rest } = draft;
+      const assignments: MachineAssignment[] = machineIds.map((machineId, i) => ({
+        ...rest,
+        id: action.ids[i],
+        machineId,
+        assignedOn: action.date,
+      }));
+      // Each machine's log notes where it's going, keeping its current status.
+      const span =
+        draft.fromDate === draft.toDate
+          ? formatDate(draft.fromDate)
+          : `${formatDate(draft.fromDate)} – ${formatDate(draft.toDate)}`;
+      const logs: MachineLog[] = machineIds.map((machineId, i) => ({
+        id: action.logIds[i],
+        machineId,
+        date: action.date,
+        status: currentStatus(state, machineId),
+        note: `Assigned to ${draft.requestRef} · ${purpose} · ${span}`,
+        loggedBy: draft.assignedBy,
+        sequence: state.logs.length + i,
+      }));
+      return { ...state, assignments: [...state.assignments, ...assignments], logs: [...state.logs, ...logs] };
+    }
   }
 }
 
@@ -263,6 +292,7 @@ function createSampleState(): MachineryState {
     receipts: [],
     returns: [],
     checkouts: [],
+    assignments: [],
   };
   const slips = new Map<string, string>();
   return sampleEvents.reduce((state, event) => replay(state, event, slips), empty);
@@ -320,5 +350,16 @@ export function useMachineryStore() {
     dispatch({ type: 'checkIn', checkoutId, checkIn: draft });
   }, []);
 
-  return { state, addTool, receive, logMachine, extendHire, sendBack, checkout, checkIn };
+  /** Put machines on an equipment request; each machine's log records it. */
+  const assignMachines = useCallback((draft: MachineAssignmentDraft) => {
+    dispatch({
+      type: 'assign',
+      ids: draft.machineIds.map(() => newId()),
+      logIds: draft.machineIds.map(() => newId()),
+      date: todayISO(),
+      draft,
+    });
+  }, []);
+
+  return { state, addTool, receive, logMachine, extendHire, sendBack, checkout, checkIn, assignMachines };
 }

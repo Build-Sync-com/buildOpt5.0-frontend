@@ -14,7 +14,24 @@ import type { CheckoutDraft, ToolStock } from '../../../../types/machinery';
  * Tool slip: tools leaving the store with a worker or gang. Only what's in
  * the store and fit to use can go out; the slip stays open until the tools
  * are checked back in.
+ *
+ * Opened from an equipment request, it answers that request: the request
+ * number, work area and due-back date are filled in, each requested tool
+ * starts at what's still outstanding (as much as the store has free), and a
+ * summary shows what's gone out against the request so far. The slip
+ * quotes the request number, which is how the request knows it's filled.
  */
+
+/** The equipment request being answered, when opened from one. */
+export type CheckoutRequest = {
+  /** "EQ-701". */
+  code: string;
+  workArea: string;
+  neededTo: string;
+  tools: { toolId: string; requested: number; checkedOut: number }[];
+  /** The request also asks for machines - those are assigned, not put on a tool slip. */
+  hasMachines: boolean;
+};
 type LineDraft = { key: string; toolId: string; quantity: string };
 
 type HeaderDraft = {
@@ -22,6 +39,7 @@ type HeaderDraft = {
   workArea: string;
   checkedOutOn: string;
   dueBack: string;
+  requestRef: string;
 };
 
 type Errors = Record<string, string>;
@@ -32,6 +50,7 @@ type CheckoutFormProps = {
   workAreas: string[];
   issuedBy: string;
   initialToolId?: string;
+  request?: CheckoutRequest;
   onSubmit: (draft: CheckoutDraft) => void;
   onClose: () => void;
 };
@@ -44,6 +63,7 @@ function CheckoutForm({
   workAreas,
   issuedBy,
   initialToolId,
+  request,
   onSubmit,
   onClose,
 }: CheckoutFormProps) {
@@ -59,17 +79,28 @@ function CheckoutForm({
 
   const [header, setHeader] = useState<HeaderDraft>({
     issuedTo: '',
-    workArea: '',
+    workArea: request?.workArea ?? '',
     checkedOutOn: today,
-    dueBack: today,
+    dueBack: request && request.neededTo > today ? request.neededTo : today,
+    requestRef: request?.code ?? '',
   });
-  const [lines, setLines] = useState<LineDraft[]>(() => [
-    {
-      key: newId(),
-      toolId: initialToolId && stockById.get(initialToolId)?.available ? initialToolId : '',
-      quantity: '',
-    },
-  ]);
+  const [lines, setLines] = useState<LineDraft[]>(() => {
+    // From a request: each tool still outstanding, as many as the store has free.
+    const fromRequest = (request?.tools ?? []).flatMap((t) => {
+      const available = stockById.get(t.toolId)?.available ?? 0;
+      const outstanding = t.requested - t.checkedOut;
+      if (outstanding <= 0 || available <= 0) return [];
+      return [{ key: newId(), toolId: t.toolId, quantity: String(Math.min(outstanding, available)) }];
+    });
+    if (fromRequest.length) return fromRequest;
+    return [
+      {
+        key: newId(),
+        toolId: initialToolId && stockById.get(initialToolId)?.available ? initialToolId : '',
+        quantity: '',
+      },
+    ];
+  });
   const [submitted, setSubmitted] = useState(false);
 
   const validate = (): Errors => {
@@ -113,6 +144,7 @@ function CheckoutForm({
       checkedOutOn: header.checkedOutOn,
       dueBack: header.dueBack,
       issuedBy,
+      requestRef: header.requestRef.trim() || undefined,
       lines: lines.map((line) => ({ toolId: line.toolId, quantity: num(line.quantity) })),
     });
   };
@@ -130,9 +162,13 @@ function CheckoutForm({
       onClose={onClose}
       size="lg"
       closeOnBackdrop={false}
-      eyebrow="Tool slip"
+      eyebrow={request ? `Answering ${request.code}` : 'Tool slip'}
       title="Check out tools"
-      description="Lend tools from the store to a worker or gang. They stay on the slip until checked back in."
+      description={
+        request
+          ? 'Lend the requested tools from the store. They stay on the slip until checked back in.'
+          : 'Lend tools from the store to a worker or gang. They stay on the slip until checked back in.'
+      }
       footer={
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm">
@@ -158,6 +194,54 @@ function CheckoutForm({
           <p role="alert" className="mb-6 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
             Some details are missing or more than the store holds - check the highlighted fields.
           </p>
+        )}
+
+        {/* The request being answered */}
+        {request && (
+          <div className="mb-8 rounded-2xl border border-blue-200 bg-blue-50/60 p-4">
+            <p className="text-sm font-semibold text-gray-900">{request.code} asks for</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {request.tools.map((t) => {
+                const item = stockById.get(t.toolId);
+                if (!item) return null;
+                const thisSlip = lines
+                  .filter((l) => l.toolId === t.toolId)
+                  .reduce((sum, l) => sum + (num(l.quantity) > 0 ? num(l.quantity) : 0), 0);
+                const total = t.checkedOut + thisSlip;
+                const done = total >= t.requested;
+                return (
+                  <li
+                    key={t.toolId}
+                    className="flex items-center justify-between gap-3 rounded-xl bg-white px-3 py-2 text-sm"
+                  >
+                    <span className="flex min-w-0 items-center gap-2">
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                          done ? 'bg-blue-600 text-white' : 'border border-gray-300 text-transparent'
+                        }`}
+                      >
+                        <Icon name="check" className="h-3 w-3" strokeWidth={2.5} />
+                      </span>
+                      <span className="truncate text-gray-900">{item.tool.name}</span>
+                    </span>
+                    <span className="shrink-0 text-right">
+                      <span className={`font-semibold ${done ? 'text-blue-700' : 'text-gray-900'}`}>
+                        {total}/{t.requested}
+                      </span>
+                      {!done && item.available <= 0 && (
+                        <span className="block text-xs font-medium text-red-600">None free in the store</span>
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+            {request.hasMachines && (
+              <p className="mt-3 text-xs text-gray-500">
+                It also asks for machines - assign those with “Assign machines” on the request.
+              </p>
+            )}
+          </div>
         )}
 
         <SectionHeading title="Who and where" />
@@ -232,6 +316,15 @@ function CheckoutForm({
                 </button>
               ))}
             </div>
+          </FormField>
+          <FormField label="Request no." htmlFor="requestRef" hint="If the tools answer a request, e.g. EQ-701">
+            <input
+              id="requestRef"
+              value={header.requestRef}
+              onChange={(e) => updateHeader({ requestRef: e.target.value })}
+              placeholder="Optional"
+              className={inputClass}
+            />
           </FormField>
         </div>
 

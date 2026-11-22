@@ -98,7 +98,9 @@ function CheckoutList({ checkouts, tools, canManage, onCheckIn, onOpenTool }: Ch
                         <DueLabel checkout={checkout} />
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
-                        {checkout.workArea} · {pieces} {pieces === 1 ? 'piece' : 'pieces'} · Issued by{' '}
+                        {checkout.workArea}
+                        {checkout.requestRef && <> · for {checkout.requestRef}</>} · {pieces}{' '}
+                        {pieces === 1 ? 'piece' : 'pieces'} · Issued by{' '}
                         {checkout.issuedBy}
                         <span className="text-gray-400"> · {formatAgo(checkout.checkedOutOn)}</span>
                       </p>
